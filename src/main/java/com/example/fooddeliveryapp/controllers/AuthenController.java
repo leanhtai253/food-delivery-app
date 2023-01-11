@@ -37,7 +37,7 @@ public class AuthenController {
 
         String token = jwtUtil.generate(request.getEmail(), "token");
         String tokenDecoded = jwtUtil.getSubject(token);
-
-        return new ResponseEntity<>(token, HttpStatus.OK);
+        String welcomeMessage = "Welcome " + request.getEmail();
+        return new ResponseEntity<>(welcomeMessage, HttpStatus.OK);
     }
 }
