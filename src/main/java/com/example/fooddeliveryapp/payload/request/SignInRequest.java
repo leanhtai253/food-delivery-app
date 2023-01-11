@@ -5,7 +5,7 @@ import javax.validation.constraints.NotBlank;
 
 public class SignInRequest {
     @NotBlank(message = "Email is required")
-    @Email(message = "Email is not valid") //, regexp = "^(?=.{1,64}@)[A-Za-z0-9_-]+(\\\\.[A-Za-z0-9_-]+)*@[^-][A-Za-z0-9-]+(\\\\.[A-Za-z0-9-]+)*(\\\\.[A-Za-z]{2,})$")
+    @Email(message = "Email is not valid", regexp = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$")
     private String email;
 
     @NotBlank(message = "Password is required")
