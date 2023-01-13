@@ -2,6 +2,7 @@ package com.example.fooddeliveryapp.controllers;
 
 import com.example.fooddeliveryapp.configurations.security.JwtUtil;
 import com.example.fooddeliveryapp.payload.request.SignInRequest;
+import com.example.fooddeliveryapp.payload.response.ResponseSuccess;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -37,7 +38,9 @@ public class AuthenController {
 
         String token = jwtUtil.generate(request.getEmail(), "token");
         String tokenDecoded = jwtUtil.getSubject(token);
-        String welcomeMessage = "Welcome " + request.getEmail();
-        return new ResponseEntity<>(welcomeMessage, HttpStatus.OK);
+
+        ResponseSuccess responseSuccess = new ResponseSuccess();
+        responseSuccess.setStatus(HttpStatus.OK.value());
+        return new ResponseEntity<>(responseSuccess, HttpStatus.OK);
     }
 }

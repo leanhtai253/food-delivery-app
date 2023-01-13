@@ -1,6 +1,8 @@
 package com.example.fooddeliveryapp.configurations.security;
 
+import com.example.fooddeliveryapp.payload.response.ResponseError;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
@@ -20,7 +22,11 @@ public class CustomAuthenticationEntryPoint implements AuthenticationEntryPoint 
         response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
         OutputStream responseStream = response.getOutputStream();
         ObjectMapper mapper = new ObjectMapper();
-        mapper.writeValue(responseStream, "Wrong credentials");
+
+        ResponseError responseError = new ResponseError();
+        responseError.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+        responseError.setMessage("Incorrect email or password");
+        mapper.writeValue(responseStream, responseError);
         responseStream.flush();
     }
 

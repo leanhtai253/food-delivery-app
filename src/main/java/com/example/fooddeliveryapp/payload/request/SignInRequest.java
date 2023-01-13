@@ -1,5 +1,7 @@
 package com.example.fooddeliveryapp.payload.request;
 
+import com.example.fooddeliveryapp.payload.response.ResponseError;
+
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
