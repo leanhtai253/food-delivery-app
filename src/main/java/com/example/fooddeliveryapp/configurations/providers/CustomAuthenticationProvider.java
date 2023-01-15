@@ -1,6 +1,7 @@
 package com.example.fooddeliveryapp.configurations.providers;
 
 import com.example.fooddeliveryapp.entities.DevUserEntity;
+import com.example.fooddeliveryapp.payload.response.ResponseError;
 import com.example.fooddeliveryapp.services.DevUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
