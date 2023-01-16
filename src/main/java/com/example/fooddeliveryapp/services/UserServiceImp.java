@@ -7,8 +7,6 @@ import com.example.fooddeliveryapp.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
 public class UserServiceImp implements UserService {
     @Autowired
@@ -19,16 +17,16 @@ public class UserServiceImp implements UserService {
 
     @Override
     public boolean checkEmailExists(String email) {
-        List<UserEntity> users = userRepository.findAllByEmail(email);
-        return users.size() > 0;
+        UserEntity user = userRepository.findByEmail(email);
+        return user != null;
     }
 
     @Override
-    public UserDTO findUserByEmail(String email) {
-        List<UserEntity> users = userRepository.findAllByEmail(email);
-        if (users.size() == 1) {
+    public UserDTO findUserByEmail(String email){
+        UserEntity user = userRepository.findByEmail(email);
+        if (user != null) {
             UserDTO userDTO = new UserDTO();
-            userDTO = userMapper.userToUserDTO(users.get(0));
+            userDTO = userMapper.userToUserDTO(user);
             return userDTO;
         }
         else return null;

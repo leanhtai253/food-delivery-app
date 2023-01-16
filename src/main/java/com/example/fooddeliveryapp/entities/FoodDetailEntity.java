@@ -30,5 +30,6 @@ public class FoodDetailEntity {
 
     @OneToOne()
     @JoinColumn(name = "id_food")
+    @JsonIgnore
     private FoodEntity food;
 }
