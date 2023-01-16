@@ -39,6 +39,7 @@ public class AuthenController {
         String tokenDecoded = jwtUtil.getSubject(token);
 
         ResponseSuccess responseSuccess = new ResponseSuccess();
+        responseSuccess.setData(token);
         responseSuccess.setStatus(HttpStatus.OK.value());
         return new ResponseEntity<>(responseSuccess, HttpStatus.OK);
     }

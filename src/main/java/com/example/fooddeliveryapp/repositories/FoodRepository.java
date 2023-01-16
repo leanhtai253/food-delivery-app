@@ -1,10 +1,11 @@
 package com.example.fooddeliveryapp.repositories;
 
-import com.example.fooddeliveryapp.entities.UserEntity;
+import com.example.fooddeliveryapp.entities.FoodEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
-public interface UserRepository extends JpaRepository<UserEntity, Integer> {
-    UserEntity findByEmail(String email);
+public interface FoodRepository extends JpaRepository<FoodEntity, Integer> {
 }
