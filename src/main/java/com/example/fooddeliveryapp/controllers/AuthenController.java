@@ -32,7 +32,6 @@ public class AuthenController {
         UsernamePasswordAuthenticationToken authReq = new UsernamePasswordAuthenticationToken(
                 request.getEmail(), request.getPassword()
         );
-        System.out.println("Arrived at sign-in controller");
         Authentication authentication = authenticationManager.authenticate(authReq);
         SecurityContextHolder.getContext().setAuthentication(authentication);
 

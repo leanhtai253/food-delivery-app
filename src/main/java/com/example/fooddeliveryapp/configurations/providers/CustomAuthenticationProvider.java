@@ -1,8 +1,7 @@
 package com.example.fooddeliveryapp.configurations.providers;
 
-import com.example.fooddeliveryapp.entities.DevUserEntity;
-import com.example.fooddeliveryapp.payload.response.ResponseError;
-import com.example.fooddeliveryapp.services.DevUserService;
+import com.example.fooddeliveryapp.dto.UserDTO;
+import com.example.fooddeliveryapp.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -17,7 +16,7 @@ import java.util.ArrayList;
 @Component
 public class CustomAuthenticationProvider implements AuthenticationProvider {
     @Autowired
-    DevUserService devUserService;
+    UserService userService;
 
     @Autowired
     PasswordEncoder passwordEncoder;
@@ -27,8 +26,8 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
         String email = authentication.getName();
         String password = String.valueOf(authentication.getCredentials());
         System.out.println("Arrived at custom provider. " + email + " " + password);
-        if (devUserService.checkEmailExists(email)) {
-            DevUserEntity user = devUserService.findUserByEmail(email);
+        if (userService.checkEmailExists(email)) {
+            UserDTO user = userService.findUserByEmail(email);
             System.out.println("Fetched pwd: " + user.getPassword());
             if (passwordEncoder.matches(password,user.getPassword())) {
                 UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
