@@ -32,7 +32,6 @@ public class AuthenController {
         UsernamePasswordAuthenticationToken authReq = new UsernamePasswordAuthenticationToken(
                 request.getEmail(), request.getPassword()
         );
-        System.out.println("Arrived at sign-in controller");
         Authentication authentication = authenticationManager.authenticate(authReq);
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
@@ -40,6 +39,7 @@ public class AuthenController {
         String tokenDecoded = jwtUtil.getSubject(token);
 
         ResponseSuccess responseSuccess = new ResponseSuccess();
+        responseSuccess.setData(token);
         responseSuccess.setStatus(HttpStatus.OK.value());
         return new ResponseEntity<>(responseSuccess, HttpStatus.OK);
     }
