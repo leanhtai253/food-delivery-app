@@ -1,6 +1,7 @@
 package com.example.fooddeliveryapp.controllers;
 
 import com.example.fooddeliveryapp.dto.FoodViewDTO;
+import com.example.fooddeliveryapp.exceptions.NoCategoryFoundException;
 import com.example.fooddeliveryapp.payload.response.ResponseSuccess;
 import com.example.fooddeliveryapp.services.CategoryService;
 import com.example.fooddeliveryapp.services.FoodService;
@@ -26,7 +27,7 @@ public class FoodSortController {
     @GetMapping("/{category}")
     public ResponseEntity<Object> getListingsByCategory (@RequestParam("sortBy") String sortBy,
                                                @RequestParam("price") String price,
-                                               @PathVariable("category") int category) {
+                                               @PathVariable("category") int category) throws NoCategoryFoundException {
 
         List<FoodViewDTO> foods = categoryService.getFoodsWithinCategory(category);
         foods = foodService.sortFoods(foods, sortBy, price);
