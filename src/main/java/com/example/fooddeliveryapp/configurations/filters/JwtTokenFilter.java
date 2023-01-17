@@ -2,6 +2,7 @@ package com.example.fooddeliveryapp.configurations.filters;
 
 import com.example.fooddeliveryapp.configurations.security.JwtUtil;
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContext;
@@ -38,8 +39,9 @@ public class JwtTokenFilter extends OncePerRequestFilter {
                 Map<String,Object> subjectData = gson.fromJson(subjectJson,Map.class);
                 if (StringUtils.hasText(subjectData.get("type").toString())
                     && !subjectData.get("type").equals("refresh")) {
+                    String currentName = (String) subjectData.get("data");
                     UsernamePasswordAuthenticationToken authenticationToken = new
-                            UsernamePasswordAuthenticationToken("","", new ArrayList<>());
+                            UsernamePasswordAuthenticationToken(currentName, null, new ArrayList<>());
                     SecurityContextHolder.getContext().setAuthentication(authenticationToken);
                 }
             }
