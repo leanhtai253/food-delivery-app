@@ -2,6 +2,7 @@ package com.example.fooddeliveryapp.services;
 
 import com.example.fooddeliveryapp.dto.FoodViewDTO;
 import com.example.fooddeliveryapp.entities.CategoryEntity;
+import com.example.fooddeliveryapp.exceptions.NoCategoryFoundException;
 import com.example.fooddeliveryapp.mapper.FoodMapper;
 import com.example.fooddeliveryapp.repositories.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,12 +20,16 @@ public class CategoryServiceImp implements CategoryService{
     FoodMapper foodMapper;
 
     @Override
-    public List<FoodViewDTO> getFoodsWithinCategory(int categoryId) {
+    public List<FoodViewDTO> getFoodsWithinCategory(int categoryId) throws NoCategoryFoundException {
         CategoryEntity categoryEntity = categoryRepository.findById(categoryId);
-        List<FoodViewDTO> foods = new ArrayList<>();
-        categoryEntity.getFoods().forEach((food) -> {
-            foods.add(foodMapper.foodToFoodViewDto(food));
-        });
-        return foods;
+        if (categoryEntity != null) {
+            List<FoodViewDTO> foods = new ArrayList<>();
+            categoryEntity.getFoods().forEach((food) -> {
+                foods.add(foodMapper.foodToFoodViewDto(food));
+            });
+            return foods;
+        } else {
+            throw new NoCategoryFoundException(categoryId);
+        }
     }
 }
