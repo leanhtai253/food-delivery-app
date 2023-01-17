@@ -8,6 +8,7 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
@@ -33,6 +34,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
                 UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
                         user.getEmail(), user.getPassword(), new ArrayList<>()
                 );
+                SecurityContextHolder.getContext().setAuthentication(authenticationToken);
                 System.out.println("Password matches");
                 return authenticationToken;
             } else {

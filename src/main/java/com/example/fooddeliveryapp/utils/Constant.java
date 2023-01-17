@@ -9,4 +9,5 @@ public class Constant {
     public static final String STATUS_CANCELED = "Canceled";
 
     public static final String MSG_CHECKOUT_SUCCESSFULLY = "Checkout successfully";
+    public static enum ADDRESS_TYPE {Home, Work};
 }
