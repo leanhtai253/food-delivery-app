@@ -1,8 +1,12 @@
 # create and drop tables and sequences, load import.sql
 spring:
   jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
     properties:
       hibernate:
+<<<<<<< HEAD
         dialect: org.hibernate.dialect.MySQL5InnoDBDialect
         jdbc:
           batch_size: 40
@@ -13,6 +17,9 @@ spring:
     hibernate:
       ddl-auto: none
     show-sql: true
+=======
+        dialect: org.hibernate.dialect.MySQL8Dialect
+>>>>>>> d44649c731ccad5abb4bad4ef4aece7669dc487d
 # MySQL settings
 # spring
 #  datasource:
