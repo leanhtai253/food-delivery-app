@@ -2,38 +2,27 @@ package com.example.fooddeliveryapp.services;
 
 import com.example.fooddeliveryapp.dto.AddressDTO;
 import com.example.fooddeliveryapp.dto.UserDTO;
-<<<<<<< HEAD
 import com.example.fooddeliveryapp.dto.UserSignUpDTO;
-=======
 import com.example.fooddeliveryapp.entities.UserAddressEntity;
->>>>>>> d44649c731ccad5abb4bad4ef4aece7669dc487d
 import com.example.fooddeliveryapp.entities.UserEntity;
 import com.example.fooddeliveryapp.exceptions.NoAddressFoundException;
 import com.example.fooddeliveryapp.exceptions.UnableToAddAddressException;
 import com.example.fooddeliveryapp.mapper.AddressMapper;
 import com.example.fooddeliveryapp.mapper.UserMapper;
-<<<<<<< HEAD
 import com.example.fooddeliveryapp.mapper.UserSignUpMapper;
-import com.example.fooddeliveryapp.payload.request.SignUpRequest;
-import com.example.fooddeliveryapp.payload.response.ResponseError;
-import com.example.fooddeliveryapp.payload.response.ResponseSuccess;
 import com.example.fooddeliveryapp.repositories.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.BadCredentialsException;
-=======
 import com.example.fooddeliveryapp.repositories.AddressRepository;
-import com.example.fooddeliveryapp.repositories.UserRepository;
 import com.example.fooddeliveryapp.utils.AddressUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
->>>>>>> d44649c731ccad5abb4bad4ef4aece7669dc487d
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
 
 @Service
 @AllArgsConstructor
@@ -51,14 +40,11 @@ public class UserServiceImp implements UserService {
     UserMapper userMapper;
 
     @Autowired
-<<<<<<< HEAD
     UserSignUpMapper userSignUpMapper;
-=======
     AddressMapper addressMapper;
 
     @Autowired
     AddressUtils addressUtils;
->>>>>>> d44649c731ccad5abb4bad4ef4aece7669dc487d
 
     @Override
     public boolean checkEmailExists(String email) {
@@ -78,18 +64,16 @@ public class UserServiceImp implements UserService {
     }
 
     @Override
-<<<<<<< HEAD
     public UserSignUpDTO findByEmail(String email) {
         UserEntity user = userRepository.findByEmail(email);
         UserSignUpDTO userSignUpDTO = new UserSignUpDTO();
             userSignUpDTO = userSignUpMapper.userSignUpToUserSignUpDTO(user);
             return userSignUpDTO;
         }
-    }
 
 
 
-=======
+
     public List<AddressDTO> getAddressesByUserEmail(String email) {
         UserEntity user = userRepository.findByEmail(email);
         List<AddressDTO> addresses = new ArrayList<>();
@@ -154,4 +138,3 @@ public class UserServiceImp implements UserService {
         }
     }
 }
->>>>>>> d44649c731ccad5abb4bad4ef4aece7669dc487d

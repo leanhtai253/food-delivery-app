@@ -6,20 +6,7 @@ spring:
       ddl-auto: update
     properties:
       hibernate:
-<<<<<<< HEAD
-        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
-        jdbc:
-          batch_size: 40
-        format_sql: false
-        order_inserts: true
-        order_updates: true
-        auto_quote_keyword: true
-    hibernate:
-      ddl-auto: none
-    show-sql: true
-=======
         dialect: org.hibernate.dialect.MySQL8Dialect
->>>>>>> d44649c731ccad5abb4bad4ef4aece7669dc487d
 # MySQL settings
 # spring
 #  datasource:
