@@ -4,15 +4,21 @@ import com.example.fooddeliveryapp.dto.AddressDTO;
 import com.example.fooddeliveryapp.dto.UserDTO;
 import com.example.fooddeliveryapp.entities.UserAddressEntity;
 import com.example.fooddeliveryapp.entities.UserEntity;
+import com.example.fooddeliveryapp.exceptions.NoAddressFoundException;
+import com.example.fooddeliveryapp.exceptions.UnableToAddAddressException;
 import com.example.fooddeliveryapp.mapper.AddressMapper;
 import com.example.fooddeliveryapp.mapper.UserMapper;
+import com.example.fooddeliveryapp.repositories.AddressRepository;
 import com.example.fooddeliveryapp.repositories.UserRepository;
-import org.apache.commons.math3.analysis.function.Add;
+import com.example.fooddeliveryapp.utils.AddressUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class UserServiceImp implements UserService {
@@ -20,10 +26,19 @@ public class UserServiceImp implements UserService {
     UserRepository userRepository;
 
     @Autowired
+    AddressRepository addressRepository;
+
+    @Autowired
+    AddressService addressService;
+
+    @Autowired
     UserMapper userMapper;
 
     @Autowired
     AddressMapper addressMapper;
+
+    @Autowired
+    AddressUtils addressUtils;
 
     @Override
     public boolean checkEmailExists(String email) {
@@ -67,5 +82,43 @@ public class UserServiceImp implements UserService {
             return null;
         }
         return null;
+    }
+
+    @Override
+    public AddressDTO addNewAddressForUserEmail(String email, AddressDTO address) throws UnableToAddAddressException {
+        UserEntity user = userRepository.findByEmail(email);
+        UserAddressEntity newAddress = addressMapper.addressDtoToAddress(address, user);
+        UserAddressEntity result =  addressRepository.save(newAddress);
+        if (result != null) {
+            AddressDTO resultDto = addressMapper.addressToAddressDto(result);
+            return resultDto;
+        }
+        else throw new UnableToAddAddressException(addressUtils.MSG_UNABLE_TO_ADD_ADDRESS());
+    }
+
+    @Override
+    public void updateDefaultAddress(String email, int id) throws NoAddressFoundException {
+        if (addressService.checkAddressExistsById(id)) {
+            UserEntity user = userRepository.findByEmail(email);
+            Set<UserAddressEntity> new_addresses = new HashSet<>();
+            for (UserAddressEntity addr : user.getUserAddresses()) {
+                if (addr.getId() == id) {
+                    for (UserAddressEntity address : user.getUserAddresses()) {
+                        if (address.getId() != id && address.isDefault()) {
+                            address.setDefault(false);
+                        } else if (address.getId() == id) {
+                            address.setDefault(true);
+                        }
+                        new_addresses.add(address);
+                    }
+                    user.setUserAddresses(new_addresses);
+                    UserEntity result = userRepository.save(user);
+                    if (result != null) return;
+                    else throw new EmptyResultDataAccessException("Unable to update default address", 1);
+                }
+            }
+        } else {
+            throw new NoAddressFoundException(addressUtils.MSG_NO_ADDRESS_FOUND_ID(id));
+        }
     }
 }
