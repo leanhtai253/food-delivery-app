@@ -8,7 +8,6 @@ import com.example.fooddeliveryapp.payload.request.SignInRequest;
 import com.example.fooddeliveryapp.payload.request.SignUpRequest;
 import com.example.fooddeliveryapp.payload.response.ResponseError;
 import com.example.fooddeliveryapp.payload.response.ResponseSuccess;
-import com.example.fooddeliveryapp.repositories.UserRepository;
 import com.example.fooddeliveryapp.services.UserService;
 import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
@@ -41,9 +40,6 @@ public class AuthenController {
     UserService userService;
 
     @Autowired
-    UserRepository userRepository;
-
-    @Autowired
     PasswordEncoder passwordEncoder;
 
     @PostMapping("/sign-in")
@@ -62,7 +58,6 @@ public class AuthenController {
         responseSuccess.setStatus(HttpStatus.OK.value());
         return new ResponseEntity<>(responseSuccess, HttpStatus.OK);
     }
-
 
 
     @PostMapping("/sign-up")
