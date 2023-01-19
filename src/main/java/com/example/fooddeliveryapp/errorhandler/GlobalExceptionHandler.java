@@ -1,6 +1,6 @@
 package com.example.fooddeliveryapp.errorhandler;
 
-
+import com.example.fooddeliveryapp.exceptions.AlreadyExistException;
 import com.example.fooddeliveryapp.exceptions.CategoryNotExistException;
 import com.example.fooddeliveryapp.exceptions.NoAddressFoundException;
 import com.example.fooddeliveryapp.exceptions.NoCategoryFoundException;
@@ -13,7 +13,6 @@ import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,6 +27,7 @@ public class GlobalExceptionHandler {
         });
         return new ResponseEntity<>(buildResponseError(HttpStatus.BAD_REQUEST,errors), HttpStatus.BAD_REQUEST);
     }
+
     // Handle missing request param => return NOT FOUND
     @ExceptionHandler({MissingServletRequestParameterException.class, MethodArgumentTypeMismatchException.class})
     public ResponseEntity<?> handledMissingServletRequestParameterException(Exception ex) {
@@ -55,10 +55,15 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(buildResponseError(HttpStatus.NOT_FOUND, ex.getMessage()), HttpStatus.NOT_FOUND);
     }
 
+    @ExceptionHandler(AlreadyExistException.class)
+    public ResponseEntity<?> handleAlreadyExistException(AlreadyExistException ex){
+        return new ResponseEntity<>(buildResponseError(HttpStatus.BAD_REQUEST,ex.getMessage()),HttpStatus.BAD_REQUEST);
+    }
     private ResponseError buildResponseError(HttpStatus status, Object errors) {
         ResponseError responseError = new ResponseError();
         responseError.setStatus(status.value());
         responseError.setMessage(errors);
         return responseError;
     }
+
 }

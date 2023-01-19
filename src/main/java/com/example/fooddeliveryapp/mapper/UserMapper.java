@@ -1,6 +1,7 @@
 package com.example.fooddeliveryapp.mapper;
 
 import com.example.fooddeliveryapp.dto.UserDTO;
+import com.example.fooddeliveryapp.dto.UserSignUpDTO;
 import com.example.fooddeliveryapp.entities.DevUser;
 import com.example.fooddeliveryapp.entities.UserEntity;
 import org.springframework.stereotype.Service;
@@ -17,5 +18,13 @@ public class UserMapper {
         userDTO.setVerifyCodeExpired(user.getVerifyCodeExpired());
         userDTO.setActive(user.isActive());
         return userDTO;
+    }
+
+    public UserSignUpDTO userSignUpToUserSignUpDTO(UserEntity user){
+        UserSignUpDTO userSignUpDTO = new UserSignUpDTO();
+        userSignUpDTO.setFullName(user.getFullName());
+        userSignUpDTO.setEmail(user.getEmail());
+        userSignUpDTO.setPassword(user.getPassword());
+        return userSignUpDTO;
     }
 }
