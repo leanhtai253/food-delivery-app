@@ -1,6 +1,6 @@
 package com.example.fooddeliveryapp.errorhandler;
-
 import com.example.fooddeliveryapp.exceptions.AlreadyExistException;
+import com.example.fooddeliveryapp.exceptions.CategoryNotExistException;
 import com.example.fooddeliveryapp.exceptions.NoAddressFoundException;
 import com.example.fooddeliveryapp.exceptions.NoCategoryFoundException;
 import com.example.fooddeliveryapp.exceptions.UnableToAddAddressException;
@@ -40,12 +40,16 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(buildResponseError(HttpStatus.NOT_FOUND, ex.getMessage()), HttpStatus.NOT_FOUND);
     }
 
+    @ExceptionHandler(CategoryNotExistException.class)
+    public ResponseEntity<?> handCategoryNotExistException(CategoryNotExistException ex) {
+        return new ResponseEntity<>(buildResponseError(HttpStatus.NOT_FOUND, ex.getMessage()), HttpStatus.NOT_FOUND);
+    }
+
     // Handle Unable To Add Address
     @ExceptionHandler(UnableToAddAddressException.class)
     public ResponseEntity<?> handleUnableToAddAddressException(UnableToAddAddressException ex) {
         return new ResponseEntity<>(buildResponseError(HttpStatus.INTERNAL_SERVER_ERROR,ex.getMessage()),HttpStatus.INTERNAL_SERVER_ERROR);
     }
-
     @ExceptionHandler(NoAddressFoundException.class)
     public ResponseEntity<?> handleNoAddressFoundException(NoAddressFoundException ex) {
         return new ResponseEntity<>(buildResponseError(HttpStatus.NOT_FOUND, ex.getMessage()), HttpStatus.NOT_FOUND);
