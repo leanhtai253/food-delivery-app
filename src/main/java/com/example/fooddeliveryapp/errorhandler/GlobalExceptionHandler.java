@@ -42,6 +42,8 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(CategoryNotExistException.class)
     public ResponseEntity<?> handCategoryNotExistException(CategoryNotExistException ex) {
+        return new ResponseEntity<>(buildResponseError(HttpStatus.NOT_FOUND, ex.getMessage()), HttpStatus.NOT_FOUND);
+    }
 
     // Handle Unable To Add Address
     @ExceptionHandler(UnableToAddAddressException.class)
@@ -52,6 +54,7 @@ public class GlobalExceptionHandler {
     public ResponseEntity<?> handleNoAddressFoundException(NoAddressFoundException ex) {
         return new ResponseEntity<>(buildResponseError(HttpStatus.NOT_FOUND, ex.getMessage()), HttpStatus.NOT_FOUND);
     }
+
     private ResponseError buildResponseError(HttpStatus status, Object errors) {
         ResponseError responseError = new ResponseError();
         responseError.setStatus(status.value());
