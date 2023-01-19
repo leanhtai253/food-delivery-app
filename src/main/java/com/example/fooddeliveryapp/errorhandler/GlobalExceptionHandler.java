@@ -1,4 +1,5 @@
 package com.example.fooddeliveryapp.errorhandler;
+
 import com.example.fooddeliveryapp.exceptions.AlreadyExistException;
 import com.example.fooddeliveryapp.exceptions.CategoryNotExistException;
 import com.example.fooddeliveryapp.exceptions.NoAddressFoundException;
@@ -12,7 +13,6 @@ import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
-
 import java.util.ArrayList;
 import java.util.List;
 
