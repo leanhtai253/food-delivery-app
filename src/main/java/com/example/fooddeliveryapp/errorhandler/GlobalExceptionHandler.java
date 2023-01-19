@@ -1,5 +1,6 @@
 package com.example.fooddeliveryapp.errorhandler;
 
+import com.example.fooddeliveryapp.exceptions.CategoryNotExistException;
 import com.example.fooddeliveryapp.exceptions.NoCategoryFoundException;
 import com.example.fooddeliveryapp.payload.response.ResponseError;
 import org.springframework.http.HttpStatus;
@@ -35,6 +36,11 @@ public class GlobalExceptionHandler {
     // Handle Not Found Category with id
     @ExceptionHandler(NoCategoryFoundException.class)
     public ResponseEntity<?> handNoCategoryFoundException(NoCategoryFoundException ex) {
+        return new ResponseEntity<>(buildResponseError(HttpStatus.NOT_FOUND, ex.getMessage()), HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(CategoryNotExistException.class)
+    public ResponseEntity<?> handCategoryNotExistException(CategoryNotExistException ex) {
         return new ResponseEntity<>(buildResponseError(HttpStatus.NOT_FOUND, ex.getMessage()), HttpStatus.NOT_FOUND);
     }
 

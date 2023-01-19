@@ -1,8 +1,11 @@
 package com.example.fooddeliveryapp.services;
 
+import com.example.fooddeliveryapp.dto.CategoryDTO;
 import com.example.fooddeliveryapp.dto.FoodViewDTO;
 import com.example.fooddeliveryapp.entities.CategoryEntity;
+import com.example.fooddeliveryapp.exceptions.CategoryNotExistException;
 import com.example.fooddeliveryapp.exceptions.NoCategoryFoundException;
+import com.example.fooddeliveryapp.mapper.CategoryMapper;
 import com.example.fooddeliveryapp.mapper.FoodMapper;
 import com.example.fooddeliveryapp.repositories.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +22,9 @@ public class CategoryServiceImp implements CategoryService{
     @Autowired
     FoodMapper foodMapper;
 
+    @Autowired
+    CategoryMapper categoryMapper;
+
     @Override
     public List<FoodViewDTO> getFoodsWithinCategory(int categoryId) throws NoCategoryFoundException {
         CategoryEntity categoryEntity = categoryRepository.findById(categoryId);
@@ -30,6 +36,20 @@ public class CategoryServiceImp implements CategoryService{
             return foods;
         } else {
             throw new NoCategoryFoundException(categoryId);
+        }
+    }
+
+    @Override
+    public List<CategoryDTO> getAllCategories() throws CategoryNotExistException {
+        List<CategoryEntity> categoryEntities = categoryRepository.findAll();
+        if(categoryEntities != null) {
+            List<CategoryDTO> categoryDTOS = new ArrayList<>();
+            categoryEntities.forEach((category) -> {
+                categoryDTOS.add(categoryMapper.categoryToCategoryDTO(category));
+            });
+            return categoryDTOS;
+        } else {
+            throw new CategoryNotExistException();
         }
     }
 }
