@@ -1,4 +1,4 @@
-package com.example.fooddeliveryapp.exceptions;
+package com.example.fooddeliveryapp.errorhandler;
 
 import com.example.fooddeliveryapp.payload.response.ResponseError;
 import org.springframework.http.HttpHeaders;
