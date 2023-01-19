@@ -43,6 +43,7 @@ public class WebSecurityConfig {
                 .and()
                 .authorizeRequests()
                 .antMatchers("/authen/sign-in").permitAll()
+                .antMatchers("/authen/sign-up").permitAll()
                 .anyRequest().authenticated()
                 .and().exceptionHandling()
                 .authenticationEntryPoint(new CustomAuthenticationEntryPoint());
