@@ -10,6 +10,7 @@ import com.example.fooddeliveryapp.exceptions.UnableToAddAddressException;
 import com.example.fooddeliveryapp.mapper.AddressMapper;
 import com.example.fooddeliveryapp.mapper.UserMapper;
 import com.example.fooddeliveryapp.payload.request.SignUpRequest;
+import com.example.fooddeliveryapp.mapper.UserSignUpMapper;
 import com.example.fooddeliveryapp.repositories.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +43,9 @@ public class UserServiceImp implements UserService {
 
     @Autowired
     AddressMapper addressMapper;
+
+    @Autowired
+    UserSignUpMapper userSignUpMapper;
 
     @Autowired
     AddressUtils addressUtils;

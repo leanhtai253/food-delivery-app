@@ -15,6 +15,7 @@ public interface UserService {
 
     UserDTO findUserByEmail(String email);
 
+
     AddressDTO getUserDefaultAddress(String email);
 
     AddressDTO addNewAddressForUserEmail(String email, AddressDTO address) throws UnableToAddAddressException;
