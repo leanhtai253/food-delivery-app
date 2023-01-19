@@ -7,6 +7,8 @@ import com.example.fooddeliveryapp.exceptions.NoAddressFoundException;
 import com.example.fooddeliveryapp.exceptions.UnableToAddAddressException;
 import com.example.fooddeliveryapp.payload.request.SignUpRequest;
 
+import java.util.List;
+
 public interface UserService {
     boolean checkEmailExists(String email);
 
@@ -19,4 +21,6 @@ public interface UserService {
     AddressDTO addNewAddressForUserEmail(String email, AddressDTO address) throws UnableToAddAddressException;
 
     void updateDefaultAddress(String email, int id) throws NoAddressFoundException;
+
+    List<AddressDTO> getAddressesByUserEmail(String email);
 }
