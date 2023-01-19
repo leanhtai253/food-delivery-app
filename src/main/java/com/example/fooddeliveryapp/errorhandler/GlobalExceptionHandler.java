@@ -1,18 +1,5 @@
 package com.example.fooddeliveryapp.errorhandler;
 
-<<<<<<< HEAD
-import com.example.fooddeliveryapp.payload.response.ResponseError;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.validation.FieldError;
-import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.bind.annotation.ControllerAdvice;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.context.request.WebRequest;
-import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
-=======
 import com.example.fooddeliveryapp.exceptions.NoAddressFoundException;
 import com.example.fooddeliveryapp.exceptions.NoCategoryFoundException;
 import com.example.fooddeliveryapp.exceptions.UnableToAddAddressException;
@@ -24,12 +11,9 @@ import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
->>>>>>> d44649c731ccad5abb4bad4ef4aece7669dc487d
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
@@ -42,8 +26,6 @@ public class GlobalExceptionHandler {
         });
         return new ResponseEntity<>(buildResponseError(HttpStatus.BAD_REQUEST,errors), HttpStatus.BAD_REQUEST);
     }
-<<<<<<< HEAD
-=======
     // Handle missing request param => return NOT FOUND
     @ExceptionHandler({MissingServletRequestParameterException.class, MethodArgumentTypeMismatchException.class})
     public ResponseEntity<?> handledMissingServletRequestParameterException(Exception ex) {
@@ -66,7 +48,6 @@ public class GlobalExceptionHandler {
     public ResponseEntity<?> handleNoAddressFoundException(NoAddressFoundException ex) {
         return new ResponseEntity<>(buildResponseError(HttpStatus.NOT_FOUND, ex.getMessage()), HttpStatus.NOT_FOUND);
     }
->>>>>>> d44649c731ccad5abb4bad4ef4aece7669dc487d
 
     private ResponseError buildResponseError(HttpStatus status, Object errors) {
         ResponseError responseError = new ResponseError();
