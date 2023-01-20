@@ -1,5 +1,6 @@
 package com.example.fooddeliveryapp.mapper;
 
+import com.example.fooddeliveryapp.dto.FoodDTO;
 import com.example.fooddeliveryapp.dto.FoodViewDTO;
 import com.example.fooddeliveryapp.entities.FoodEntity;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,14 @@ public class FoodMapper {
         dto.setCategory(entity.getCategory() != null ? entity.getCategory().getName() : "");
         dto.setRating(entity.getFoodDetail() != null ? entity.getFoodDetail().getRating() : 0);
 
+        return dto;
+    }
+
+    public FoodDTO foodToFoodDto(FoodEntity entity) {
+        FoodDTO dto = new FoodDTO();
+        dto.setId(entity.getId());
+        dto.setImage(entity.getImage());
+        dto.setName(entity.getName());
         return dto;
     }
 }
