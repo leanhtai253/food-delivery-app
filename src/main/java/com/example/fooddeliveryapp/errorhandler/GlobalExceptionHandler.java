@@ -1,10 +1,6 @@
 package com.example.fooddeliveryapp.errorhandler;
 
-import com.example.fooddeliveryapp.exceptions.AlreadyExistException;
-import com.example.fooddeliveryapp.exceptions.CategoryNotExistException;
-import com.example.fooddeliveryapp.exceptions.NoAddressFoundException;
-import com.example.fooddeliveryapp.exceptions.NoCategoryFoundException;
-import com.example.fooddeliveryapp.exceptions.UnableToAddAddressException;
+import com.example.fooddeliveryapp.exceptions.*;
 import com.example.fooddeliveryapp.payload.response.ResponseError;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -58,6 +54,11 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(AlreadyExistException.class)
     public ResponseEntity<?> handleAlreadyExistException(AlreadyExistException ex){
         return new ResponseEntity<>(buildResponseError(HttpStatus.BAD_REQUEST,ex.getMessage()),HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(RestaurantNotExistException.class)
+    public ResponseEntity<?> handleRestaurantNotExistException(RestaurantNotExistException ex) {
+        return new ResponseEntity<>(buildResponseError(HttpStatus.NOT_FOUND, ex.getMessage()), HttpStatus.NOT_FOUND);
     }
     private ResponseError buildResponseError(HttpStatus status, Object errors) {
         ResponseError responseError = new ResponseError();
