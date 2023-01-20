@@ -1,5 +1,6 @@
 package com.example.fooddeliveryapp.services;
 
+import com.example.fooddeliveryapp.dto.FoodDTO;
 import com.example.fooddeliveryapp.dto.FoodViewDTO;
 import com.example.fooddeliveryapp.entities.FoodEntity;
 import com.example.fooddeliveryapp.mapper.FoodMapper;
@@ -54,5 +55,25 @@ public class FoodServiceImp implements FoodService{
         }
 
         return foods;
+    }
+
+    @Override
+    public List<FoodDTO> getTop6FoodByArea(String area) {
+        List<FoodEntity> foodEntities = foodRepository.findTop6ByArea(area);
+        List<FoodDTO> foodDTOS = new ArrayList<>();
+        for (FoodEntity food: foodEntities) {
+            foodDTOS.add(foodMapper.foodToFoodDto(food));
+        }
+        return foodDTOS;
+    }
+
+    @Override
+    public List<FoodDTO> getAllFoodsByArea(String area) {
+        List<FoodEntity> foodEntities = foodRepository.findAllByArea(area);
+        List<FoodDTO> foodDTOS = new ArrayList<>();
+        for (FoodEntity food: foodEntities) {
+            foodDTOS.add(foodMapper.foodToFoodDto(food));
+        }
+        return foodDTOS;
     }
 }
