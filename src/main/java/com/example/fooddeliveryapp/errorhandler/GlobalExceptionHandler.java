@@ -60,6 +60,11 @@ public class GlobalExceptionHandler {
     public ResponseEntity<?> handleRestaurantNotExistException(RestaurantNotExistException ex) {
         return new ResponseEntity<>(buildResponseError(HttpStatus.NOT_FOUND, ex.getMessage()), HttpStatus.NOT_FOUND);
     }
+    @ExceptionHandler(CartOperationsException.class)
+    public ResponseEntity<?> handleCartOperationsException(CartOperationsException ex) {
+        return new ResponseEntity<>(buildResponseError(HttpStatus.INTERNAL_SERVER_ERROR,
+                ex.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
+    }
     private ResponseError buildResponseError(HttpStatus status, Object errors) {
         ResponseError responseError = new ResponseError();
         responseError.setStatus(status.value());
