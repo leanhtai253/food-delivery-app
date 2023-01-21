@@ -25,7 +25,7 @@ public class CustomAuthenticationEntryPoint implements AuthenticationEntryPoint 
 
         ResponseError responseError = new ResponseError();
         responseError.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-        responseError.setMessage("Incorrect email or password");
+        responseError.setMessage("Invalid credentials");
         mapper.writeValue(responseStream, responseError);
         responseStream.flush();
     }
