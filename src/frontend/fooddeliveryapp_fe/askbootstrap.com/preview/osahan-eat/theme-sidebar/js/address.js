@@ -1,5 +1,5 @@
-const host = "http://localhost:8481";
-const hostAddr = host + "/user/address";
+let host = "http://localhost:8481";
+let hostAddr = host + "/user/address";
 $(document).ready(function(){
     let accessToken = getCookie("access-token");
     $.ajax({
