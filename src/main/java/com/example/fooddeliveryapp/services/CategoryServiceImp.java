@@ -1,6 +1,7 @@
 package com.example.fooddeliveryapp.services;
 
 import com.example.fooddeliveryapp.dto.CategoryDTO;
+import com.example.fooddeliveryapp.dto.CategoryWithIdDTO;
 import com.example.fooddeliveryapp.dto.FoodViewDTO;
 import com.example.fooddeliveryapp.entities.CategoryEntity;
 import com.example.fooddeliveryapp.exceptions.CategoryNotExistException;
@@ -48,6 +49,20 @@ public class CategoryServiceImp implements CategoryService{
                 categoryDTOS.add(categoryMapper.categoryToCategoryDTO(category));
             });
             return categoryDTOS;
+        } else {
+            throw new CategoryNotExistException();
+        }
+    }
+
+    @Override
+    public List<CategoryWithIdDTO> getAllCategoriesWithId() throws CategoryNotExistException {
+        List<CategoryEntity> categoryEntities = categoryRepository.findAll();
+        if(categoryEntities != null) {
+            List<CategoryWithIdDTO> dtos = new ArrayList<>();
+            categoryEntities.forEach((category) -> {
+                dtos.add(categoryMapper.categoryToCategoryWithIdDTO(category));
+            });
+            return dtos;
         } else {
             throw new CategoryNotExistException();
         }

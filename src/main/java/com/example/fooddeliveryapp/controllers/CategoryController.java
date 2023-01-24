@@ -1,6 +1,7 @@
 package com.example.fooddeliveryapp.controllers;
 
 import com.example.fooddeliveryapp.dto.CategoryDTO;
+import com.example.fooddeliveryapp.dto.CategoryWithIdDTO;
 import com.example.fooddeliveryapp.exceptions.CategoryNotExistException;
 import com.example.fooddeliveryapp.payload.response.ResponseSuccess;
 import com.example.fooddeliveryapp.services.CategoryService;
@@ -24,6 +25,17 @@ public class CategoryController {
     public ResponseEntity<?> getAllCategories() throws CategoryNotExistException {
 
         List<CategoryDTO> categories = categoryService.getAllCategories();
+
+        ResponseSuccess responseSuccess = new ResponseSuccess();
+        responseSuccess.setData(categories);
+        responseSuccess.setStatus(HttpStatus.OK.value());
+
+        return new ResponseEntity<>(responseSuccess, HttpStatus.OK);
+    }
+    @GetMapping("/all/with-ids")
+    public ResponseEntity<?> getAllCategoriesWithId() throws CategoryNotExistException {
+
+        List<CategoryWithIdDTO> categories = categoryService.getAllCategoriesWithId();
 
         ResponseSuccess responseSuccess = new ResponseSuccess();
         responseSuccess.setData(categories);

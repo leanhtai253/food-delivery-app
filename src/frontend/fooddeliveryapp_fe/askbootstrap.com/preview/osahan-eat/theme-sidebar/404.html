@@ -235,11 +235,11 @@
         <i class="fas fa-angle-up"></i>
     </a>
 
-    <div class="modal fade" id="filtersModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="filtersModal" tabindex="-1" aria-labelledby="filtersModalLable" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Search filters</h5>
+                    <h5 class="modal-title" id="filtersModalLable">Search filters</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -248,59 +248,32 @@
                     <p class="text-dark mb-2 small">Sort by</p>
                     <div class="btn-group btn-group-toggle mb-3" data-toggle="buttons">
                         <label class="btn osahan-radio btn-light btn-sm active rounded">
-                            <input type="radio" name="options" id="option1" checked> <i class="mdi mdi-fire"></i> Most
-                            popular
+                            <input type="radio" name="overall-options" id="option-popular" value="popularity" checked />
+                            <i class="mdi mdi-fire"></i> Popular
                         </label>
                         <label class="btn osahan-radio btn-light btn-sm rounded">
-                            <input type="radio" name="options" id="option2"> <i class="mdi mdi-clock-outline"></i>
-                            Delivery time
-                        </label>
-                        <label class="btn osahan-radio btn-light btn-sm rounded">
-                            <input type="radio" name="options" id="option3"> <i class="mdi mdi-star"></i> Rating
+                            <input type="radio" name="overall-options" value="rating" id="option-rating" />
+                            <i class="mdi mdi-star"></i> Rating
                         </label>
                     </div>
-                    <p class="text-dark mb-2 small mt-3">Price range</p>
-                    <div class="btn-group btn-group-toggle mb-3" data-toggle="buttons">
+                    <p class="text-dark mb-2 small mt-3">Price</p>
+                    <div class="btn-group btn-group-toggle mb-3" data-toggle="buttons" id="filterPriceOptions">
                         <label class="btn osahan-radio btn-light active btn-sm rounded">
-                            <input type="radio" name="options" id="option1" checked> $
+                            <input type="radio" name="filter-price-options" value="asc" id="option-price-asc" checked /> Ascending
                         </label>
                         <label class="btn osahan-radio btn-light btn-sm rounded">
-                            <input type="radio" name="options" id="option2"> $$
-                        </label>
-                        <label class="btn osahan-radio btn-light btn-sm rounded">
-                            <input type="radio" name="options" id="option3"> $$$
+                            <input type="radio" name="filter-price-options" value="desc" id="option-price-desc" /> Descending
                         </label>
                     </div>
                     <p class="text-dark mb-2 small mt-3">Categories</p>
-                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons" id="categoryModalList">
                         <label class="btn osahan-radio btn-light active btn-sm rounded">
-                            <input type="radio" name="options" id="option1" checked> Burger
-                        </label>
-                        <label class="btn osahan-radio btn-light btn-sm rounded">
-                            <input type="radio" name="options" id="option2"> Fast food
-                        </label>
-                        <label class="btn osahan-radio btn-light btn-sm rounded">
-                            <input type="radio" name="options" id="option3"> American food
-                        </label>
-                        <label class="btn osahan-radio btn-light btn-sm rounded">
-                            <input type="radio" name="options" id="option4"> Pizza
-                        </label>
-                        <label class="btn osahan-radio btn-light btn-sm rounded">
-                            <input type="radio" name="options" id="option5"> Asian
-                        </label>
-                        <label class="btn osahan-radio btn-light btn-sm rounded">
-                            <input type="radio" name="options" id="option6"> Desert
-                        </label>
-                        <label class="btn osahan-radio btn-light btn-sm rounded">
-                            <input type="radio" name="options" id="option7"> Mexican
-                        </label>
-                        <label class="btn osahan-radio btn-light btn-sm rounded">
-                            <input type="radio" name="options" id="option8"> Breakfast
-                        </label>
+                            <input class="categoryModalItem" type="radio" name="category-options" value=0 id=0 checked/>
+                            All
                     </div>
                 </div>
                 <div class="modal-footer justify-content-start">
-                    <a href="listing.html" class="btn btn-primary btn-block mt-2">Apply filters</a>
+                    <a class="btn btn-primary btn-block mt-2 text-white" data-dismiss="modal" id="filterApplyBtn">Apply filters</a>
                 </div>
             </div>
         </div>
@@ -637,6 +610,7 @@
         data-cf-beacon='{"rayId":"75c6f948bbac7eba","version":"2022.10.3","r":1,"token":"dd471ab1978346bbb991feaa79e6ce5c","si":100}'
         crossorigin="anonymous"></script>
     <script src="js/address.js" type="text/javascript"></script>
+    <script src="js/filters.js" type="text/javascript"></script>
 </body>
 
 <!-- Mirrored from askbootstrap.com/preview/osahan-eat/theme-sidebar/404.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 19 Oct 2022 05:04:58 GMT -->
