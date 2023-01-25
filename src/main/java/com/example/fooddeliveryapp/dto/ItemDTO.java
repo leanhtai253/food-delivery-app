@@ -22,4 +22,8 @@ public class ItemDTO implements Serializable {
     @NotNull(message = "Product price is required.")
     @Min(value = 0, message = "Product price is not valid.")
     private float price=-1;
+
+    private String name;
+
+    private String image;
 }
