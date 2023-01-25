@@ -11,6 +11,7 @@ $(document).ready(function(){
             let addr = response.data;
             let defaultAddress = addr.street + ", " + addr.state + ", " + addr.city;
             $("#defaultAddress").text(defaultAddress);
+            $(".defaultAddress").text(defaultAddress);
         }
     })
     $.ajax({

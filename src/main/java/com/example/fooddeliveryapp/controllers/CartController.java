@@ -8,10 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -31,7 +28,7 @@ public class CartController {
         return new ResponseEntity<>(responseSuccess, HttpStatus.OK);
     }
 
-    @PostMapping("/view-cart")
+    @GetMapping("/view-cart")
     public ResponseEntity<?> viewCart() {
         String email = SecurityContextHolder.getContext()
                 .getAuthentication().getName();
