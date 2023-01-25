@@ -39,7 +39,6 @@ public class SearchServiceImp implements SearchService {
     @Override
     public List<SearchRestaurantDTO> searchByRestaurantName(String name) {
         List<RestaurantEntity> restaurantEntities = searchRestaurantRepository.searchByRestaurantName(name);
-        System.out.println("test" + restaurantEntities);
         List<SearchRestaurantDTO> searchRestaurantDTOS = new ArrayList<>();
         for (RestaurantEntity restaurant: restaurantEntities) {
             searchRestaurantDTOS.add(searchRestaurantMapper.searchToSearchResDTO(restaurant));

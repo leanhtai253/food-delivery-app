@@ -11,10 +11,6 @@ public class SearchFoodMapper {
         dto.setIdDish(entity.getId());
         dto.setImageDish(entity.getImage());
         dto.setNameDish(entity.getName());
-//
-//        dto.setNameRes(entity.getRestaurant().getName());
-//        dto.setImageRes(entity.getRestaurant().getImage());
-//        dto.setRatingRes(entity.getRestaurant().getRestaurantDetail().getRating());
         return dto;
     }
 }
