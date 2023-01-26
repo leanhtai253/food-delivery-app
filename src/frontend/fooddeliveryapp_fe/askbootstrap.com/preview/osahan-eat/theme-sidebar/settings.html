@@ -463,16 +463,16 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-8 form-group"><label
-                                                class="form-label font-weight-bold small">Valid
-                                                through(MM/YY)</label><input placeholder="Enter Valid through(MM/YY)"
-                                                type="number" class="form-control"></div>
-                                        <div class="col-md-4 form-group"><label
-                                                class="form-label font-weight-bold small">CVV</label><input
-                                                placeholder="Enter CVV Number" type="number" class="form-control"></div>
+                                        <div class="col-md-7 form-group"><label
+                                                class="form-label font-weight-bold small">Company
+                                                </label><input id="inputCompany" placeholder="Enter company"
+                                                type="text" class="form-control"></div>
+                                        <div class="col-md-5 form-group"><label
+                                                class="form-label font-weight-bold small">Card Type</label><input
+                                                id="inputCardType" placeholder="Enter card type" type="text" class="form-control"></div>
                                         <div class="col-md-12 form-group"><label
-                                                class="form-label font-weight-bold small">Name on card</label><input
-                                                placeholder="Enter Card name" type="text" class="form-control"></div>
+                                                class="form-label font-weight-bold small">Level</label><input
+                                                id="inputLevel" placeholder="Enter card level" type="text" class="form-control"></div>
                                         <div class="col-md-12 form-group">
                                             <div class="custom-control custom-checkbox"><input type="checkbox"
                                                     id="custom-checkbox1" class="custom-control-input"><label title=""
@@ -532,7 +532,7 @@
                 </div>
                 <div class="modal-footer border-0">
                     <button type="button" data-dismiss="modal" aria-label="Close"
-                        class="btn btn-primary btn-block">Update preferences</button>
+                        class="btn btn-primary btn-block addCard">ADD CARD</button>
                 </div>
             </div>
         </div>
@@ -542,7 +542,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">My Cards <span class="small">(1)</span></h5>
+                    <h5 class="modal-title" id="exampleModalLabel">My Cards</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -561,44 +561,9 @@
                             <input type="radio" name="options" id="option3"> <i class="fab fa-paypal"></i> Paypal
                         </label>
                     </div>
-                    <h6 class="mb-3">My cards <span class="small">(2)</span></h6>
-                    <div class="btn-group btn-group-toggle osahan-card" data-toggle="buttons">
-                        <label class="btn osahan-radio osahan-card-pay btn-light btn-sm rounded mb-2 active w-100">
-                            <input type="radio" name="options" id="option1" checked>
-                            <div class="d-flex align-items-center card-detials small mb-3">
-                                <p class="small"><i class="mdi mdi-chip"></i></p>
-                                <p class="ml-auto d-flex align-items-center">
-                                    <span class="card-no mr-2"><i class="mdi mdi-circle"></i> <i
-                                            class="mdi mdi-circle"></i> <i class="mdi mdi-circle"></i> <i
-                                            class="mdi mdi-circle"></i></span>
-                                    <span class="small">1211</span>
-                                </p>
-                            </div>
-                            <h1 class="mb-0">Mastercard</h1>
-                            <p class="small mb-1">Platinum</p>
-                            <p class="text-right mb-0"><i class="fab fa-cc-mastercard text-warning"></i></p>
-                        </label>
-                        <label class="btn osahan-radio osahan-card-pay btn-light btn-sm rounded mb-2 w-100">
-                            <input type="radio" name="options" id="option2">
-                            <div class="d-flex align-items-center card-detials small mb-3">
-                                <p class="small"><i class="mdi mdi-chip"></i></p>
-                                <p class="ml-auto d-flex align-items-center">
-                                    <span class="card-no mr-2"><i class="mdi mdi-circle"></i> <i
-                                            class="mdi mdi-circle"></i> <i class="mdi mdi-circle"></i> <i
-                                            class="mdi mdi-circle"></i></span>
-                                    <span class="small">2277</span>
-                                </p>
-                            </div>
-                            <h1 class="mb-0">Visa Debit</h1>
-                            <p class="small mb-1">Plantinum</p>
-                            <p class="text-right mb-0"><i class="fab fa-cc-visa"></i></p>
-                        </label>
+                    <h6 class="mb-3">My cards <span class="small cardModalLength">()</span></h6>
+                    <div class="btn-group btn-group-toggle osahan-card" id="cardModalList" data-toggle="buttons">
                     </div>
-                    <a href="#" data-toggle="modal" data-target="#paymentsModal" class="btn btn-light btn-block"><i
-                            class="mdi mdi-plus"></i> Add</a>
-                </div>
-                <div class="modal-footer border-0">
-                    <button data-dismiss="modal" aria-label="Close" class="btn btn-primary btn-block">Add Card</button>
                 </div>
             </div>
         </div>
@@ -1048,6 +1013,8 @@
     <script src="js/address.js" type="text/javascript"></script>
     <script src="js/filters.js" type="text/javascript"></script>
     <script src="js/cart.js" type="text/javascript"></script>
+    <script src="js/card.js" type="text/javascript"></script>
+
 </body>
 
 <!-- Mirrored from askbootstrap.com/preview/osahan-eat/theme-sidebar/settings.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 19 Oct 2022 05:04:57 GMT -->
