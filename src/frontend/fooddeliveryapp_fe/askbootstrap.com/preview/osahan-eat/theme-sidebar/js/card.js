@@ -33,18 +33,23 @@ $(document).ready(function(){
                     $("#cardId1").closest(".osahan-card-pay").addClass("active")
                 }
     })
-    // $(document).on("click", ".addCard", function() {
-    //     console.log($(this))
-    //     let addressNo = $(this).attr("addressNo");
-    //     console.log(addressNo);
-    //     $.ajax({
-    //         method: "POST",
-    //         url: hostAddr + `/update/default/${addressNo}`,
-    //         headers: {"Authorization": "Bearer " + accessToken}
-    //     }).done(function(data){
-    //         location.reload();
-    //     })
-    // });
+    $(document).on("click", ".addCard", function() {
+        console.log(this);
+        let data = {
+            company: $("#inputCompany").val(),
+            cardType: $("#inputCardType").val(),
+            level: $("#inputLevel").val()
+        }
+        $.ajax({
+            method: "POST",
+            url: hostCard + `/add`,
+            data: JSON.stringify(data),
+            contentType: "application/json; charset=utf-8",
+            headers: {"Authorization": "Bearer " + accessToken}
+        }).done(function(data){
+            location.reload();
+        })
+    });
 })
 function getCookie(cname) {
   var name = cname + "=";
