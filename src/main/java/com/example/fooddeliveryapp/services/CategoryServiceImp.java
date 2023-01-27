@@ -67,4 +67,18 @@ public class CategoryServiceImp implements CategoryService{
             throw new CategoryNotExistException();
         }
     }
+
+    @Override
+    public List<CategoryDTO> getTop6Categoties() throws CategoryNotExistException {
+        List<CategoryEntity> categoryEntities = categoryRepository.getTop6Categories();
+        if(categoryEntities != null) {
+            List<CategoryDTO> dtos = new ArrayList<>();
+            categoryEntities.forEach((category) -> {
+                dtos.add(categoryMapper.categoryToCategoryDTO(category));
+            });
+            return dtos;
+        } else {
+            throw new CategoryNotExistException();
+        }
+    }
 }
