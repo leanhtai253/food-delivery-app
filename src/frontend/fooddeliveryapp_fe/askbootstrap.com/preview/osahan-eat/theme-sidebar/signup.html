@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" type="image/png" href="img/logo.png">
-    <title>Osahan Eat - Online Food Ordering Website HTML Template</title>
+    <title>Sign Up</title>
 
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
 
@@ -29,12 +29,12 @@
         <div class="col-lg-6 mx-auto">
             <h3 class="mb-1">Create an account</h3>
             <p class="mb-5">Please create an account to continue using our service</p>
-            <form method="post" th:action="@{/sign-up}" th:object="${userSignUpDTO}">
+            <form method="post">
                 <div class="d-flex align-items-center mb-4">
                     <div class="mr-3 bg-light rounded p-2 osahan-icon"><i class="mdi mdi-account-outline"></i></div>
                     <div class="w-100">
                         <p class="mb-0 small font-weight-bold text-dark">Full Name</p>
-                        <input type="text" th:value="*{fullName}" class="form-control form-control-sm p-0 border-input border-0 rounded-0"
+                        <input type="text" id="fullname" class="form-control form-control-sm p-0 border-input border-0 rounded-0"
                                placeholder="Enter Your Name">
                     </div>
                 </div>
@@ -42,7 +42,7 @@
                     <div class="mr-3 bg-light rounded p-2 osahan-icon"><i class="mdi mdi-email-outline"></i></div>
                     <div class="w-100">
                         <p class="mb-0 small font-weight-bold text-dark">Email Address</p>
-                        <input type="email" th:value="*{email}" class="form-control form-control-sm p-0 border-input border-0 rounded-0"
+                        <input type="email" id="email" class="form-control form-control-sm p-0 border-input border-0 rounded-0"
                                placeholder="Enter Your Email">
                     </div>
                 </div>
@@ -51,12 +51,12 @@
                     </div>
                     <div class="w-100">
                         <p class="mb-0 small font-weight-bold text-dark">Password</p>
-                        <input type="password" th:value="*{password}" class="form-control form-control-sm p-0 border-input border-0 rounded-0"
+                        <input type="password" id="password" class="form-control form-control-sm p-0 border-input border-0 rounded-0"
                                placeholder="Enter Your Password">
                     </div>
                 </div>
                 <div class="mb-3">
-                    <a href="index.html" class="btn btn-primary btn-block mb-3">Create an account</a>
+                    <a href="#" class="btn btn-primary btn-block mb-3" id="btn-signup">Create an account</a>
                     <p class="text-center">Already have an account? <a href="signin.html"
                                                                        class="text-danger text-decoration-none">Sign
                         in</a></p>
@@ -78,6 +78,8 @@
         integrity="sha512-Gi7xpJR8tSkrpF7aordPZQlW2DLtzUlZcumS8dMQjwDHEnw9I7ZLyiOj/6tZStRBGtGgN6ceN6cMH8z7etPGlw=="
         data-cf-beacon='{"rayId":"75c6f94d7bbf7eba","version":"2022.10.3","r":1,"token":"dd471ab1978346bbb991feaa79e6ce5c","si":100}'
         crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script src="js/signup.js"></script>
 </body>
 
 <!-- Mirrored from askbootstrap.com/preview/osahan-eat/theme-sidebar/signup.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 19 Oct 2022 05:04:58 GMT -->
