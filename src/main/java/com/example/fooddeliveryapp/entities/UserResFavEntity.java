@@ -17,10 +17,12 @@ import javax.persistence.*;
 @AllArgsConstructor
 public class UserResFavEntity {
     @Id
-    private int id_user;
+    @Column(name = "id_user")
+    private int idUser;
 
     @Id
-    private int id_restaurant;
+    @Column(name = "id_restaurant")
+    private int idRestaurant;
 
     @ManyToOne()
     @JoinColumn(name = "id_user", insertable = false, updatable = false)

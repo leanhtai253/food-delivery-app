@@ -5,12 +5,14 @@ import com.example.fooddeliveryapp.dto.UserDTO;
 import com.example.fooddeliveryapp.dto.UserSignUpDTO;
 import com.example.fooddeliveryapp.entities.UserAddressEntity;
 import com.example.fooddeliveryapp.entities.UserEntity;
-import com.example.fooddeliveryapp.exceptions.NoAddressFoundException;
-import com.example.fooddeliveryapp.exceptions.UnableToAddAddressException;
+import com.example.fooddeliveryapp.exceptions.EmptyFieldException;
+import com.example.fooddeliveryapp.mapper.exceptions.NoAddressFoundException;
+import com.example.fooddeliveryapp.mapper.exceptions.UnableToAddAddressException;
 import com.example.fooddeliveryapp.mapper.AddressMapper;
 import com.example.fooddeliveryapp.mapper.UserMapper;
 import com.example.fooddeliveryapp.payload.request.SignUpRequest;
 import com.example.fooddeliveryapp.repositories.UserRepository;
+import com.example.fooddeliveryapp.utils.Constant;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.example.fooddeliveryapp.repositories.AddressRepository;
@@ -18,16 +20,20 @@ import com.example.fooddeliveryapp.utils.AddressUtils;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
+import org.springframework.web.multipart.MultipartFile;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+import java.util.*;
 
 
 @Service
 @AllArgsConstructor
 public class UserServiceImp implements UserService {
+    private final Path avatarRoot = Paths.get("127.0.0.1:5500/askbootstrap.com/preview/osahan-eat/admin/img/user");
     @Autowired
     UserRepository userRepository;
 
@@ -138,5 +144,47 @@ public class UserServiceImp implements UserService {
         } else {
             throw new NoAddressFoundException(addressUtils.MSG_NO_ADDRESS_FOUND_ID(id));
         }
+    }
+
+    @Override
+    public UserDTO showUserInfo(String email){
+        UserDTO userDTO = userMapper.userToUserDTO(userRepository.findByEmail(email));
+        return new UserDTO();
+    }
+
+    @Override
+    public UserDTO updateUserInfo(String email, String fullName, String phoneNumber) throws EmptyFieldException{
+        // user is not allowed to change email
+        UserEntity user = userRepository.findByEmail(email);
+        user.setFullName(fullName);
+        user.setPhoneNumber(phoneNumber);
+        UserDTO userDTO = userMapper.userToUserDTO(user);
+        if(userDTO.getEmail() != null && userDTO.getFullName() != null && userDTO.getPhoneNumber() != null){
+            return userDTO;
+        } else throw new EmptyFieldException(Constant.MSG_EMPTY_FIELD);
+    }
+
+    @Override
+    public boolean updateProfilePic(MultipartFile avatar, String email){
+        // update profile pic under the name of: user[i].(contentType), store avatar URL in database.user.avatar
+        String originalFileName = StringUtils.cleanPath(Objects.requireNonNull(avatar.getOriginalFilename()));
+        String contentType = originalFileName.substring(originalFileName.lastIndexOf(".")+1);
+        int id = (userRepository.findByEmail(email)).getId();
+        String savedFileName = "user" + Integer.toString(id).concat("." + contentType);
+
+        try{
+            Files.copy(avatar.getInputStream(),avatarRoot.resolve(savedFileName), StandardCopyOption.REPLACE_EXISTING);
+            userRepository.findByEmail(email).setAvatar(savedFileName);
+            return true;
+        }catch (Exception e) {
+            return false;
+        }
+    }
+
+    @Override
+    public boolean deleteProfilePic(String email){
+        //todo: if delete profile pic, use user0.png in folder
+        userRepository.findByEmail(email).setAvatar("user0.png");
+        return true;
     }
 }

@@ -17,10 +17,12 @@ import javax.persistence.*;
 @AllArgsConstructor
 public class UserFoodFavEntity {
     @Id
-    private int id_user;
+    @Column(name = "id_user")
+    private int idUser;
 
     @Id
-    private int id_food;
+    @Column(name = "id_food")
+    private int idFood;
 
     @ManyToOne()
     @JoinColumn(name = "id_user", insertable = false, updatable = false)
