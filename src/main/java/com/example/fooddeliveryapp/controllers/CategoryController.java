@@ -21,7 +21,19 @@ public class CategoryController {
     @Autowired
     CategoryService categoryService;
 
-    @GetMapping("")
+    @GetMapping("/t6")
+    public ResponseEntity<?> getTop6Categories() throws CategoryNotExistException {
+
+        List<CategoryDTO> categories = categoryService.getTop6Categoties();
+
+        ResponseSuccess responseSuccess = new ResponseSuccess();
+        responseSuccess.setData(categories);
+        responseSuccess.setStatus(HttpStatus.OK.value());
+
+        return new ResponseEntity<>(responseSuccess, HttpStatus.OK);
+    }
+
+    @GetMapping("/all")
     public ResponseEntity<?> getAllCategories() throws CategoryNotExistException {
 
         List<CategoryDTO> categories = categoryService.getAllCategories();

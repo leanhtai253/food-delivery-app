@@ -12,4 +12,5 @@ public interface CategoryService {
     List<FoodViewDTO> getFoodsWithinCategory(int categoryId) throws NoCategoryFoundException;
     List<CategoryDTO> getAllCategories() throws CategoryNotExistException;
     List<CategoryWithIdDTO> getAllCategoriesWithId() throws CategoryNotExistException;
+    List<CategoryDTO> getTop6Categoties() throws CategoryNotExistException;
 }

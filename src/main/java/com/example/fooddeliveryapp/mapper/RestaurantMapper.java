@@ -12,6 +12,7 @@ public class RestaurantMapper {
         dto.setImage(entity.getImage());
         dto.setName(entity.getName());
         dto.setRating(entity.getRestaurantDetail().getRating());
+        dto.setNationality(entity.getRestaurantDetail().getNationality());
 
         return dto;
     }
