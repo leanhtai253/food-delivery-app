@@ -5,9 +5,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class RestaurantDTO {
-    private String image;
+public class CategoryWithIdDTO {
+    private int number;
     private String name;
-    private float rating;
-    private String nationality;
 }
