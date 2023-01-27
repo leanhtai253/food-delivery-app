@@ -80,7 +80,6 @@ $(document).ready(function(){
         $(this).removeClass("bg-light text-dark").addClass("bg-primary text-white");
         $("#home-addr-tab").removeClass("bg-primary text-white").addClass("bg-light text-dark");
     })
-
 })
 
 function getCookie(cname) {
@@ -98,3 +97,4 @@ function getCookie(cname) {
     }
     return "";
 }
+

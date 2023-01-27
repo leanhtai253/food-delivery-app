@@ -11,6 +11,7 @@ import java.util.List;
 public interface CategoryRepository extends JpaRepository<CategoryEntity, Integer> {
     CategoryEntity findById(int id);
     List<CategoryEntity> findAll();
+
     @Query(value = "select c.* from category as c order by c.id ASC limit 6", nativeQuery = true)
     List<CategoryEntity> getTop6Categories();
 }

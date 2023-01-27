@@ -1,5 +1,6 @@
 package com.example.fooddeliveryapp.repositories;
 
+import com.example.fooddeliveryapp.entities.CategoryEntity;
 import com.example.fooddeliveryapp.entities.FoodEntity;
 import com.example.fooddeliveryapp.entities.RestaurantEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -12,4 +13,7 @@ import java.util.List;
 public interface FoodRepository extends JpaRepository<FoodEntity, Integer> {
     List<FoodEntity> findTop6ByArea(String area);
     List<FoodEntity> findAllByArea(String area);
+    List<FoodEntity> findALlByCategory(String category);
+    List<FoodEntity> findAllByCategoryAndRestaurant(CategoryEntity cate, RestaurantEntity res);
+
 }
