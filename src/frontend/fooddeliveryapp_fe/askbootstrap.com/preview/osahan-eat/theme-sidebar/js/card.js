@@ -1,7 +1,6 @@
 let hostCard = "http://localhost:8481/card";
 $(document).ready(function(){
     let accessToken = getCookie("access-token");
-    console.log(accessToken);
     $.ajax({
         method: "GET",
         url: hostCard + "",
