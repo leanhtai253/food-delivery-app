@@ -13,7 +13,7 @@ import java.util.List;
 public interface FoodRepository extends JpaRepository<FoodEntity, Integer> {
     List<FoodEntity> findTop6ByArea(String area);
     List<FoodEntity> findAllByArea(String area);
-    List<FoodEntity> findALlByCategory(String category);
     List<FoodEntity> findAllByCategoryAndRestaurant(CategoryEntity cate, RestaurantEntity res);
+    List<FoodEntity> findById(int id);
 
 }
