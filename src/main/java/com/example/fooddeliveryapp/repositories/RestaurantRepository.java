@@ -12,7 +12,7 @@ import java.util.List;
 
 @Repository
 public interface RestaurantRepository extends JpaRepository<RestaurantEntity, Integer> {
-    @Query(value = "select r.* from restaurant as r order by r.id DESC limit 6", nativeQuery = true)
+    @Query(value = "select r.* from restaurant as r order by r.id ASC limit 6", nativeQuery = true)
     List<RestaurantEntity> getTop6Restaurants();
 
     @Query(value = "select c.id, c.name from food as f join category as c on f.id_category = c.id where f.id_restaurant = :idRes", nativeQuery = true)
