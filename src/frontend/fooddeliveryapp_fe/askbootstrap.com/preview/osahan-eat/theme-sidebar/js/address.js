@@ -80,6 +80,28 @@ $(document).ready(function(){
         $(this).removeClass("bg-light text-dark").addClass("bg-primary text-white");
         $("#home-addr-tab").removeClass("bg-primary text-white").addClass("bg-light text-dark");
     })
+    $(document).on("click", "#addAddressButton", function() {
+        console.log($(this))
+        let newAddr = {
+            addressType: "Home",
+            state: $("#inputState").val(),
+            city: $("#inputCity").val(),
+            street: $("#inputStreet").val()
+        }
+        
+        if ($("#work-addr-option").closest(".address-options").hasClass("active")) {
+            newAddr.addressType = "Work"
+        }
+        console.log(newAddr);
+        $.ajax({
+            method: "POST",
+            url: hostAddr + '/add',
+            data: JSON.stringify(newAddr),
+            contentType: "application/json; charset=utf-8",
+            headers: {"Authorization": "Bearer " + accessToken},
+            success: location.reload()
+        })
+    });
 })
 
 function getCookie(cname) {
