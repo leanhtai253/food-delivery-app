@@ -205,4 +205,9 @@ public class UserServiceImp implements UserService {
         userRepository.save(user);
         return true;
     }
+
+    public int getIdByEmail(String emai) {
+        UserEntity userEntity = userRepository.findByEmail(emai);
+        return userEntity.getId();
+    }
 }

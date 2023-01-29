@@ -29,4 +29,6 @@ public interface UserService {
     UserDTO updateUserInfo(String email, String fullName, String phoneNumber) throws EmptyFieldException;
     String updateProfilePic(MultipartFile profilePic,String email);
     boolean deleteProfilePic(String email);
+
+    int getIdByEmail(String emai);
 }
