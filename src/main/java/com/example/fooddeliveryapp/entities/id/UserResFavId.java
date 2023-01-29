@@ -12,6 +12,6 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserResFavId implements Serializable {
-    private int id_user;
-    private int id_restaurant;
+    private int idUser;
+    private int idRestaurant;
 }
