@@ -9,4 +9,5 @@ public class RestaurantDTO {
     private String image;
     private String name;
     private float rating;
+    private String nationality;
 }

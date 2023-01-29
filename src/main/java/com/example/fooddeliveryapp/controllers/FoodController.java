@@ -1,6 +1,10 @@
 package com.example.fooddeliveryapp.controllers;
 
+import com.example.fooddeliveryapp.dto.FoodChoiceDTO;
 import com.example.fooddeliveryapp.dto.FoodDTO;
+import com.example.fooddeliveryapp.dto.FoodViewDTO;
+import com.example.fooddeliveryapp.entities.RestaurantEntity;
+import com.example.fooddeliveryapp.exceptions.FoodNotExistException;
 import com.example.fooddeliveryapp.payload.response.ResponseSuccess;
 import com.example.fooddeliveryapp.services.FoodService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,5 +40,23 @@ public class FoodController {
         responseSuccess.setData(foods);
         responseSuccess.setStatus(HttpStatus.OK.value());
         return new ResponseEntity<>(responseSuccess, HttpStatus.OK);
+    }
+
+    @GetMapping("/{idCate}/{idRes}")
+    public ResponseEntity<?> getAllFoodByCate(@PathVariable int idCate ,@PathVariable int idRes) throws FoodNotExistException {
+        List<FoodViewDTO> dtos = foodService.getAllFoodByCategoryAndRestaurant(idCate, idRes);
+        ResponseSuccess success = new ResponseSuccess();
+        success.setData(dtos);
+        success.setStatus(HttpStatus.OK.value());
+        return new ResponseEntity<>(success,HttpStatus.OK);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getAllFoodDetailById(@PathVariable int id) throws FoodNotExistException{
+        List<FoodChoiceDTO> dtos = foodService.getAllFoodDetailById(id);
+        ResponseSuccess success = new ResponseSuccess();
+        success.setData(dtos);
+        success.setStatus(HttpStatus.OK.value());
+        return new ResponseEntity<>(success,HttpStatus.OK);
     }
 }
