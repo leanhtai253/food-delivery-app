@@ -250,7 +250,7 @@
         <i class="fas fa-angle-up"></i>
     </a>
 
-    <div class="modal fade" id="myitemsModal" data-backdrop="static" data-keyboard="false" tabindex="-1"
+    <div class="modal fade" id="foodDetailModal" data-backdrop="static" data-keyboard="false" tabindex="-1"
         aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content osahan-item-detail-pop">
@@ -263,38 +263,24 @@
                 <div class="modal-body px-3 py-0">
                     <div class="pb-3 position-relative">
                         <div class="position-absolute heart-fav">
-                            <a href="#"><i class="mdi mdi-heart"></i></a>
+                            <a href="#fav-food-icon"><i class="mdi mdi-heart"></i></a>
                         </div>
-                        <img src="img/food-banner.png" class="img-fluid col-md-12 p-0 rounded">
+                        <img id="foodDetailImg" src="img/food/burger.png" class="img-fluid col-md-12 p-0 rounded">
                     </div>
-                    <h4 class="mb-2">Char-Broiled Chicken Shish</h4>
-                    <p>Served with basmati rice or bulgur pilaf, skewered with grilled vegetables</p>
+                    <h4 class="mb-2" id="foodDetailName">Char-Broiled Chicken Shish</h4>
+                    <p id="foodDetailDesc">Served with basmati rice or bulgur pilaf, skewered with grilled vegetables</p>
                     <div class="d-flex align-items-center mb-3">
-                        <p class="text-danger mb-0">Rice choice</p>
-                        <p class="bg-primary text-white rounded px-2 py-1 mb-0 small ml-auto">Required</p>
+                        <p class="text-danger mb-0">Best werved with</p>
+                        <p class="bg-primary text-white rounded px-2 py-1 mb-0 small ml-auto">Optional</p>
                     </div>
-                    <form class="mb-2">
-                        <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" id="customCheck1" checked>
-                            <label class="custom-control-label font-weight-bold text-dark" for="customCheck1">Basmati
-                                rice</label>
-                        </div>
-                        <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" id="customCheck2">
-                            <label class="custom-control-label font-weight-bold text-dark" for="customCheck2">Brown
-                                rice</label>
-                        </div>
-                        <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" id="customCheck3">
-                            <label class="custom-control-label font-weight-bold text-dark" for="customCheck3">Bulgur
-                                pilaf</label>
-                        </div>
+                    <form class="mb-2" id="addOnList">
+                        <!--  -->
                     </form>
                     <p class="mb-0"><a href="#" class="text-decoration-none text-primary"><i
                                 class="fas fa-plus mr-2 bg-light rounded p-2"></i> Add special instructions</a></p>
                 </div>
                 <div class="modal-footer">
-                    <button data-toggle="modal" data-target="#cartModal" class="btn btn-primary btn-block">Add
+                    <button foodItem data-toggle="modal" id="addToCartBtn" class="btn btn-primary btn-block">Add
                         ($15.00)</button>
                 </div>
             </div>
