@@ -8,6 +8,10 @@ $(document).ready(function() {
         success: function (response) {
             console.log(response);
             let data = response.data;
+            if(data.length > 0) {
+                $("#titleRestaurant").removeClass("d-none")
+                $("#seeAllRestaurant").removeClass("d-none")
+            }
             data.forEach(item => {
                 $("#restaurants").append(`
                     <a href="detail.html" class="text-dark text-decoration-none col-xl-4 col-lg-12 col-md-12">

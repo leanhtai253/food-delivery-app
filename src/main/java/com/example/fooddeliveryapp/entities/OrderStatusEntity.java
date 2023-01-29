@@ -29,6 +29,5 @@ public class OrderStatusEntity {
 
     @ManyToOne()
     @JoinColumn(name = "id_status", insertable = false, updatable = false)
-    @JsonIgnore
     private StatusEntity status;
 }

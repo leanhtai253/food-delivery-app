@@ -16,4 +16,10 @@ public class Constant {
     public static final String MSG_EMPTY_FIELD = "One or more fields are not being filled." +
             "\n Please fill in all the fields and try again.";
     public static enum ADDRESS_TYPE {Home, Work};
+
+    public static final String CONFIRMED = "Confirmed";
+    public static final String BEING_PREPARED = "Being prepared";
+    public static final String ON_THE_WAY = "On the way";
+    public static final String COMPLETED = "Completed";
+    public static final String CANCEL = "Cancel";
 }
