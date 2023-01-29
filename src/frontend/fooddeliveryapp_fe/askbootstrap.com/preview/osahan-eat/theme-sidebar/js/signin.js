@@ -5,7 +5,7 @@ $(document).ready(function(){
             email: $("#inputEmail").val(),
             password: $("#inputPassword").val()
         }
-        $.ajax({  
+        $.ajax({
             method: "POST",
             url: "http://localhost:8481/authen/sign-in",
             data: JSON.stringify(data),
@@ -16,7 +16,7 @@ $(document).ready(function(){
                 if (Array.isArray(error.message)) {
                     error.message.forEach(element => {
                         notify(element);
-                    });
+                });
                 } else {
                     notify(error.message);
                 }
@@ -34,7 +34,7 @@ $(document).ready(function(){
     $(document).on('click','.notify',function() {
         $(this).slideUp('fast',function(){$(this).remove();});
     });
-    
+
 })
 function notify(msg) {
     $('<p/>').appendTo('#notify').addClass('notify').addClass('text-center').html(msg).slideDown();

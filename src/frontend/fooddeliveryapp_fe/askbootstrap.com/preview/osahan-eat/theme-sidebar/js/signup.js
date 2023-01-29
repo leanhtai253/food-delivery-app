@@ -1,27 +1,41 @@
 $(document).ready(function () {
-    //qua trang signup.html sửa href ="#" và thêm id="btn-signup"
+
     $("#btn-signup").click(function(){
         var data = {
-            //qua trang signup.html thêm id vào cho 2 ô input email và password
             fullName: $("#fullname").val(),
             email: $("#email").val(),
             password: $("#password").val()
         }
-        console.log(data)
-        //call API raw json
         $.ajax({
             method: "POST",
-            url: "http://localhost:8081/authen/sign-up",
+            url: "http://localhost:8481/authen/sign-up",
             contentType: "application/json; charset=utf-8",
-            data: JSON.stringify(data)
+            data: JSON.stringify(data),
+            error: function(response) {
+                error = response.responseJSON
+                console.log(error.message)
+                if (Array.isArray(error.message)) {
+                    error.message.forEach(element => {
+                        notify(element);
+                });
+                } else {
+                    notify(error.message);
+                }
+            }
         }).done(function (result) {
             if(result.success){
                 //chuyen page signin
                 window.location.href = "signin.html";
             }else{
                 //thong bao that bai
-                alert(result.description)
+                alert("sign-up failed")
             }
         });
     })
+    $(document).on('click','.notify',function() {
+        $(this).slideUp('fast',function(){$(this).remove();});
+    });
 })
+function notify(msg) {
+    $('<p/>').appendTo('#notify').addClass('notify').addClass('text-center').html(msg).slideDown();
+}
