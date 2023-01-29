@@ -3,6 +3,7 @@ package com.example.fooddeliveryapp.services;
 import com.example.fooddeliveryapp.dto.FoodViewDTO;
 import com.example.fooddeliveryapp.dto.IdCateNameDTO;
 import com.example.fooddeliveryapp.dto.RestaurantDTO;
+import com.example.fooddeliveryapp.dto.RestaurantDetailDto;
 import com.example.fooddeliveryapp.entities.CategoryEntity;
 import com.example.fooddeliveryapp.entities.FoodEntity;
 import com.example.fooddeliveryapp.entities.RestaurantEntity;
@@ -62,9 +63,15 @@ public class RestaurantServiceImp implements RestaurantService {
         }
     }
 
+    @Override
+    public RestaurantDetailDto getRestaurantDetail(int id) {
+        try {
+            RestaurantEntity entity = restaurantRepository.findById(id);
+            return restaurantMapper.restaurantToRestaurantDetailDto(entity);
+        } catch (Exception e) {
+            System.out.println(e);
+            return null;
+        }
 
-
-
-
-
+    }
 }

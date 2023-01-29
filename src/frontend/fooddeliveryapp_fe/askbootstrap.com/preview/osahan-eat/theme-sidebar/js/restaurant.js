@@ -14,7 +14,7 @@ $(document).ready(function() {
             }
             data.forEach(item => {
                 $("#restaurants").append(`
-                    <a href="detail.html" class="text-dark text-decoration-none col-xl-4 col-lg-12 col-md-12">
+                    <a href="detail.html" itemId=${item.id} class="text-dark text-decoration-none col-xl-4 col-lg-12 col-md-12 restaurantItem">
                         <div class="bg-white shadow-sm rounded d-flex align-items-center p-1 mb-4 osahan-list">
                             <div class="bg-light p-3 rounded">
                                 <img src="img/restaurant/${item.image}" class="img-fluid" />
@@ -47,9 +47,9 @@ $(document).ready(function() {
             headers: { "Authorization": "Bearer " + accessToken },
             success: function (response) {
                 let data = response.data;
-                data.forEach(item => {
+                data.forEach(item => { //
                     $("#restaurants").append(`
-                        <a href="detail.html" class="text-dark text-decoration-none col-xl-4 col-lg-12 col-md-12">
+                        <a href="detail.html" itemId=${item.id} class="text-dark text-decoration-none col-xl-4 col-lg-12 col-md-12 restaurantItem">
                             <div class="bg-white shadow-sm rounded d-flex align-items-center p-1 mb-4 osahan-list">
                                 <div class="bg-light p-3 rounded">
                                     <img src="img/restaurant/${item.image}" class="img-fluid" />
@@ -73,6 +73,11 @@ $(document).ready(function() {
             }
         })
     });
+    $(document).on("click", ".restaurantItem", function() {
+        // console.log($(this).itemId)
+        setCookie("viewRestaurantId",$(this).attr("itemId"))
+        setCookie("viewResCatId",1)
+    })
 })
 
 function getCookie(cname) {
@@ -89,4 +94,10 @@ function getCookie(cname) {
         }
     }
     return "";
+}
+function setCookie(cname, cvalue, exdays) {
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    var expires = "expires="+ d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
 }
