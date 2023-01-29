@@ -30,14 +30,6 @@ public class FoodMapper {
         return dto;
     }
 
-    public FoodDTO foodToFoodDto(FoodEntity entity) {
-        FoodDTO dto = new FoodDTO();
-        dto.setId(entity.getId());
-        dto.setImage(entity.getImage());
-        dto.setName(entity.getName());
-        return dto;
-    }
-
     public FoodEntity foodDTO2Food(FoodDTO dto){
         FoodEntity entity = new FoodEntity();
         entity.setId(dto.getId());

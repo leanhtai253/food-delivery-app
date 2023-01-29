@@ -1,13 +1,14 @@
 package com.example.fooddeliveryapp.services;
 
 import com.example.fooddeliveryapp.dto.AddressDTO;
+import com.example.fooddeliveryapp.dto.ProfilePicStorageDTO;
 import com.example.fooddeliveryapp.dto.UserDTO;
 import com.example.fooddeliveryapp.dto.UserSignUpDTO;
 import com.example.fooddeliveryapp.entities.UserAddressEntity;
 import com.example.fooddeliveryapp.entities.UserEntity;
 import com.example.fooddeliveryapp.exceptions.EmptyFieldException;
-import com.example.fooddeliveryapp.mapper.exceptions.NoAddressFoundException;
-import com.example.fooddeliveryapp.mapper.exceptions.UnableToAddAddressException;
+import com.example.fooddeliveryapp.exceptions.NoAddressFoundException;
+import com.example.fooddeliveryapp.exceptions.UnableToAddAddressException;
 import com.example.fooddeliveryapp.mapper.AddressMapper;
 import com.example.fooddeliveryapp.mapper.UserMapper;
 import com.example.fooddeliveryapp.payload.request.SignUpRequest;
@@ -23,6 +24,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -33,7 +35,6 @@ import java.util.*;
 @Service
 @AllArgsConstructor
 public class UserServiceImp implements UserService {
-    private final Path avatarRoot = Paths.get("127.0.0.1:5500/askbootstrap.com/preview/osahan-eat/admin/img/user");
     @Autowired
     UserRepository userRepository;
 
@@ -59,6 +60,17 @@ public class UserServiceImp implements UserService {
     public boolean checkEmailExists(String email) {
         UserEntity user = userRepository.findByEmail(email);
         return user != null;
+    }
+
+    private final Path avatarRoot;
+
+    @Autowired
+    public UserServiceImp(ProfilePicStorageDTO profilePicStorage) throws IOException{
+        // define root url
+        this.avatarRoot =Paths.get(profilePicStorage.getUploadDir()).toAbsolutePath().normalize();
+        if (Files.notExists(this.avatarRoot)) {
+            Files.createDirectories(avatarRoot);
+        }
     }
 
     @Override
@@ -149,7 +161,7 @@ public class UserServiceImp implements UserService {
     @Override
     public UserDTO showUserInfo(String email){
         UserDTO userDTO = userMapper.userToUserDTO(userRepository.findByEmail(email));
-        return new UserDTO();
+        return userDTO;
     }
 
     @Override
@@ -158,14 +170,16 @@ public class UserServiceImp implements UserService {
         UserEntity user = userRepository.findByEmail(email);
         user.setFullName(fullName);
         user.setPhoneNumber(phoneNumber);
-        UserDTO userDTO = userMapper.userToUserDTO(user);
+
+        userRepository.save(user);   // save to database
+        UserDTO userDTO = userMapper.userToUserDTO(user); // message out
         if(userDTO.getEmail() != null && userDTO.getFullName() != null && userDTO.getPhoneNumber() != null){
             return userDTO;
         } else throw new EmptyFieldException(Constant.MSG_EMPTY_FIELD);
     }
 
     @Override
-    public boolean updateProfilePic(MultipartFile avatar, String email){
+    public String updateProfilePic(MultipartFile avatar, String email){
         // update profile pic under the name of: user[i].(contentType), store avatar URL in database.user.avatar
         String originalFileName = StringUtils.cleanPath(Objects.requireNonNull(avatar.getOriginalFilename()));
         String contentType = originalFileName.substring(originalFileName.lastIndexOf(".")+1);
@@ -174,17 +188,21 @@ public class UserServiceImp implements UserService {
 
         try{
             Files.copy(avatar.getInputStream(),avatarRoot.resolve(savedFileName), StandardCopyOption.REPLACE_EXISTING);
-            userRepository.findByEmail(email).setAvatar(savedFileName);
-            return true;
+            UserEntity user =  userRepository.findByEmail(email);
+            user.setAvatar(savedFileName);
+            userRepository.save(user);
+            return savedFileName;
         }catch (Exception e) {
-            return false;
+            return "Unable to update profile pic.";
         }
     }
 
     @Override
     public boolean deleteProfilePic(String email){
         //todo: if delete profile pic, use user0.png in folder
-        userRepository.findByEmail(email).setAvatar("user0.png");
+        UserEntity user = userRepository.findByEmail(email);
+        user.setAvatar("user0.png");
+        userRepository.save(user);
         return true;
     }
 }
