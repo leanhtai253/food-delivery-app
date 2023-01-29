@@ -1,6 +1,7 @@
 a {
   text-decoration: none !important;
 }
+
 .online-dot {
   padding-left: 34px;
   margin-top: -14px;
@@ -426,6 +427,12 @@ small,
   box-shadow: 0 0.125rem 0.25rem 0 rgba(58, 59, 69, 0.2) !important;
   margin: 0 0 12px;
 }
+
+.selected {
+  background-color: #c60021 !important;
+  color: white !important;
+}
+
 @media (min-width: 768px) {
   .sidebar {
     width: 224px !important;
@@ -563,3 +570,4 @@ small,
 }
 @media (min-width: 1024px) and (max-width: 1200px) {
 }
+
