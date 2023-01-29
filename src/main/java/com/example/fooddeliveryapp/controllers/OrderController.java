@@ -1,5 +1,6 @@
 package com.example.fooddeliveryapp.controllers;
 
+import com.example.fooddeliveryapp.dto.OrderPreviousDTO;
 import com.example.fooddeliveryapp.dto.OrderUpComingDTO;
 import com.example.fooddeliveryapp.payload.response.ResponseSuccess;
 import com.example.fooddeliveryapp.services.OrderService;
@@ -24,6 +25,16 @@ public class OrderController {
     public ResponseEntity<?> getListOrderUpComing() {
         String email = SecurityContextHolder.getContext().getAuthentication().getName();
         List<OrderUpComingDTO> orders = orderService.getOrderUpComing(email);
+        ResponseSuccess responseSuccess = new ResponseSuccess();
+        responseSuccess.setStatus(HttpStatus.OK.value());
+        responseSuccess.setData(orders);
+        return new ResponseEntity<>(responseSuccess, HttpStatus.OK);
+    }
+
+    @GetMapping("/previous")
+    public ResponseEntity<?> getListOrderPrevious(){
+        String email = SecurityContextHolder.getContext().getAuthentication().getName();
+        List<OrderPreviousDTO> orders = orderService.getOrderPrevious(email);
         ResponseSuccess responseSuccess = new ResponseSuccess();
         responseSuccess.setStatus(HttpStatus.OK.value());
         responseSuccess.setData(orders);
