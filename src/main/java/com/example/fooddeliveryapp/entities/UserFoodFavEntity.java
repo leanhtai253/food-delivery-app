@@ -17,10 +17,12 @@ import javax.persistence.*;
 @AllArgsConstructor
 public class UserFoodFavEntity {
     @Id
-    private int id_user;
+    @Column(name = "id_user")
+    private int idUser;
 
     @Id
-    private int id_food;
+    @Column(name = "id_food")
+    private int idFood;
 
     @ManyToOne()
     @JoinColumn(name = "id_user", insertable = false, updatable = false)
@@ -31,4 +33,14 @@ public class UserFoodFavEntity {
     @JoinColumn(name = "id_food", insertable = false, updatable = false)
     @JsonIgnore
     private FoodEntity food;
+
+    @Override
+    public boolean equals(Object obj) {
+        boolean result = false;
+        if(obj == this){result = true;};
+        if(!(obj instanceof UserFoodFavEntity)){result = false;};
+        UserFoodFavEntity ref = (UserFoodFavEntity) obj;
+        result = this.idUser==ref.idUser && this.idFood==ref.getIdFood() && this.user==ref.getUser() && this.food==ref.getFood();
+        return result;
+    }
 }

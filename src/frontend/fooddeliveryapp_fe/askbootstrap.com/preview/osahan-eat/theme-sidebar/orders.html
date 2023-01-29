@@ -40,17 +40,17 @@
                     <i class="mdi mdi-home-variant-outline"></i>
                     <span>Home</span></a>
             </li>
-
+<!-- 
             <li class="nav-item">
                 <a class="nav-link" href="explore.html">
                     <i class="mdi mdi-grid-large"></i>
                     <span>Explore</span></a>
-            </li>
+            </li> -->
 
             <li class="nav-item">
                 <a class="nav-link" href="favourities.html">
                     <i class="mdi mdi-bookmark-outline"></i>
-                    <span>Favourities</span></a>
+                    <span>Favourites</span></a>
             </li>
 
             <li class="nav-item active">
@@ -59,12 +59,12 @@
                     <span>Orders</span></a>
             </li>
 
-            <li class="nav-item">
+            <!-- <li class="nav-item">
                 <a class="nav-link d-flex align-items-center" href="messages.html">
                     <i class="mdi mdi-message-text-outline mr-2"></i>
                     <span>Messages</span>
                     <span class="rounded-circle bg-white text-primary ml-auto px-2 py-1">2</span></a>
-            </li>
+            </li> -->
 
             <li class="nav-item">
                 <a class="nav-link" href="settings.html">
@@ -169,11 +169,11 @@
                             </a>
                         </li>
 
-                        <li class="nav-item dropdown no-arrow mx-2 osahan-t-pu">
+                        <!-- <li class="nav-item dropdown no-arrow mx-2 osahan-t-pu">
                             <a class="nav-link dropdown-toggle text-dark" href="orders.html">
                                 <i class="mdi mdi-shopping text-danger"></i><span class="ml-2">Pick up</span>
                             </a>
-                        </li>
+                        </li> -->
 
                         <li class="nav-item dropdown no-arrow mx-2 osahan-t-bd">
                             <a class="nav-link dropdown-toggle text-dark" data-toggle="modal"
@@ -201,6 +201,12 @@
                                 class="mdi mdi-filter-variant"></i></a>
                         <a href="#" class="btn btn-danger" data-toggle="modal" data-target="#cartModal"><i
                                 class="mdi mdi-shopping-outline"></i></a>
+                                <a href="signin.html" id="signOutBtn" class="btn btn-secondary btn-icon-split">
+                                    <span class="icon text-white-100">
+                                        <i class="fas fa-sign-out-alt"></i>
+                                    </span>
+                                    <span class="text">Log out</span>
+                                </a>
                     </div>
                 </nav>
 
@@ -847,12 +853,14 @@
         </div>
     </div>
 
-    <div class="modal fade" id="myaddressModal" data-backdrop="static" data-keyboard="false" tabindex="-1"
+    <div class="modal fade" id="addAddressModal" data-backdrop="static" data-keyboard="false" tabindex="-1"
         aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="staticBackdropLabel">Delivered address</h5>
+                    <h5 class="modal-title" id="addAddressModalLabel">
+                        New address
+                    </h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -860,29 +868,37 @@
                 <div class="modal-body">
                     <form>
                         <div class="form-group">
-                            <label for="inputAddress" class="small font-weight-bold text-dark mb-0">Street Name</label>
+                            <label for="inputStreet" class="small font-weight-bold text-dark mb-0">Street Name</label>
                             <input type="text" class="form-control form-control-sm border-0 p-0 border-input rounded-0"
-                                id="inputAddress" placeholder="" value="300 Post Street">
+                                id="inputStreet" placeholder="" />
                         </div>
                         <div class="form-group">
-                            <label for="inputAddress" class="small font-weight-bold text-dark mb-0">City</label>
+                            <label for="inputCity" class="small font-weight-bold text-dark mb-0">City</label>
                             <input type="text" class="form-control form-control-sm border-0 p-0 border-input rounded-0"
-                                id="inputAddress" placeholder="" value="San Francisco">
+                                id="inputCity" placeholder="" />
                         </div>
                         <div class="form-group">
-                            <label for="inputAddress" class="small font-weight-bold text-dark mb-0">State</label>
+                            <label for="inputState" class="small font-weight-bold text-dark mb-0">State</label>
                             <input type="text" class="form-control form-control-sm border-0 p-0 border-input rounded-0"
-                                id="inputAddress" placeholder="" value="California">
+                                id="inputState" placeholder="" />
                         </div>
-                        <div class="form-group">
-                            <label for="inputAddress" class="small font-weight-bold text-dark mb-0">Zip Code</label>
-                            <input type="text" class="form-control form-control-sm border-0 p-0 border-input rounded-0"
-                                id="inputAddress" placeholder="" value="123456">
+                        <div class="btn-group btn-group-toggle mb-3" data-toggle="buttons">
+                            <label class="mr-5">
+                                Select your address type
+                            </label>
+                            <label class="address-options btn osahan-radio btn-light btn-sm rounded active">
+                                <input type="radio" name="addressTypesOptions" id="home-addr-option"><i class="mdi mdi-home-circle"></i> Home
+                            </label>
+                            <label class="address-options btn osahan-radio btn-light btn-sm rounded">
+                                <input type="radio" name="addressTypesOptions" id="work-addr-option"><i class="mdi mdi-briefcase"></i> Work
+                            </label>
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer border-0">
-                    <button data-dismiss="modal" aria-label="Close" class="btn btn-primary btn-block">Confirm</button>
+                    <button id="addAddressButton" data-dismiss="modal" data-toggle="modal" data-target="#addressModal" aria-label="Close" class="btn btn-primary btn-block">
+                        Add address
+                    </button>
                 </div>
             </div>
         </div>
@@ -982,6 +998,12 @@
                         <span aria-hidden="true">&times;</span>
                     </button> -->
                 </div>
+                <div class="modal-footer border-0">
+                    <button type="button" data-toggle="modal" data-target="#addAddressModal" data-dismiss="modal" class="btn btn-warning btn-icon-split btn-block align-items-center">
+                        <span><i class="mdi mdi-map-plus mr-2"></i></span> 
+                        <span>Add new address</span>
+                    </button>
+                </div>
                 <div class="modal-body">
                     <ul class="nav nav-tabs border-0 mb-3" id="AddressTab" role="tablist">
                         <li class="nav-item" role="presentation">
@@ -1036,6 +1058,7 @@
     <script src="js/cart.js" type="text/javascript"></script>
     <script src="js/authen.js" type="text/javascript"></script>
     <script src="js/orderUpComing.js" type="text/javascript"></script>
+    <script src="js/signout.js" type="text/javascript"></script>
 </body>
 
 <!-- Mirrored from askbootstrap.com/preview/osahan-eat/theme-sidebar/orders.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 19 Oct 2022 05:04:57 GMT -->

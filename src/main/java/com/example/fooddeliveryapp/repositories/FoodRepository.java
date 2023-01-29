@@ -8,12 +8,16 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface FoodRepository extends JpaRepository<FoodEntity, Integer> {
     List<FoodEntity> findTop6ByArea(String area);
     List<FoodEntity> findAllByArea(String area);
-    List<FoodEntity> findALlByCategory(String category);
+
+    FoodEntity findById(int id);
+
     List<FoodEntity> findAllByCategoryAndRestaurant(CategoryEntity cate, RestaurantEntity res);
+    List<FoodEntity> findAllById(int id);
 
 }

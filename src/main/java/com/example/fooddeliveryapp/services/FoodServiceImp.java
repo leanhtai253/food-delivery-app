@@ -1,5 +1,6 @@
 package com.example.fooddeliveryapp.services;
 
+import com.example.fooddeliveryapp.dto.FoodChoiceDTO;
 import com.example.fooddeliveryapp.dto.FoodDTO;
 import com.example.fooddeliveryapp.dto.FoodViewDTO;
 import com.example.fooddeliveryapp.entities.CategoryEntity;
@@ -99,13 +100,23 @@ public class FoodServiceImp implements FoodService{
 //    }
 
     @Override
-    public List<FoodViewDTO> findAllByCategoryAndRestaurant(int idCate, int idRes) throws FoodNotExistException {
+    public List<FoodViewDTO> getAllFoodByCategoryAndRestaurant(int idCate, int idRes) throws FoodNotExistException {
         CategoryEntity cate = categoryRepository.findById(idCate);
         RestaurantEntity res = restaurantRepository.findById(idRes);
-        List<FoodEntity> food = foodRepository.findAllByCategoryAndRestaurant(cate,res);
+        List<FoodEntity> foods = foodRepository.findAllByCategoryAndRestaurant(cate,res);
         List<FoodViewDTO> dtos = new ArrayList<>();
-        for (FoodEntity entity : food){
+        for (FoodEntity entity : foods){
             dtos.add(foodMapper.foodToFoodViewDto(entity));
+        }
+        return dtos;
+    }
+
+    @Override
+    public List<FoodChoiceDTO> getAllFoodDetailById(int id) throws FoodNotExistException {
+        List<FoodEntity> entities = foodRepository.findAllById(id);
+        List<FoodChoiceDTO> dtos = new ArrayList<>();
+        for (FoodEntity entity : entities){
+            dtos.add(foodMapper.foodToFoodChoiceDto(entity));
         }
         return dtos;
     }

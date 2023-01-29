@@ -62,22 +62,7 @@ public class RestaurantServiceImp implements RestaurantService {
         }
     }
 
-    @Override
-    public List<IdCateNameDTO> findAllCategoryByRestaurant(int idRes) throws CategoryNotExistException {
-        List<IdCateNameDTO> dtos = new ArrayList<>();
-        List<Object[]> list = restaurantRepository.getCategoryByRestaurant(idRes);
-        if (list != null) {
-            for (Object[] objects : list){
-                IdCateNameDTO idCateNameDTO = new IdCateNameDTO();
-                idCateNameDTO.setId((Integer)objects[0]);
-                idCateNameDTO.setName((String)objects[1]);
-                dtos.add(idCateNameDTO);
-            }
-            return dtos;
-        } else {
-            throw new CategoryNotExistException();
-        }
-    }
+
 
 
 

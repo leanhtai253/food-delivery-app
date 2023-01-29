@@ -19,31 +19,34 @@ public class UserEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "email")
+    @Column(name = "email", nullable = false)
     private String email;
 
-    @Column(name = "password")
+    @Column(name = "password", nullable = false)
     private String password;
 
-    @Column(name = "fullname")
+    @Column(name = "fullname", nullable = false)
     private String fullName;
 
-    @Column(name = "token")
+    @Column(name = "avatar")
+    private String avatar;
+
+    @Column(name = "token", nullable = true)
     private String token;
 
-    @Column(name = "type_token")
+    @Column(name = "type_token", nullable = true)
     private String typeToken;
 
-    @Column(name = "phone_number")
+    @Column(name = "phone_number", nullable = false)
     private String phoneNumber;
 
-    @Column(name = "verify_code")
+    @Column(name = "verify_code", nullable = true)
     private String verifyCode;
 
-    @Column(name = "verify_code_expired")
+    @Column(name = "verify_code_expired", nullable = true)
     private String verifyCodeExpired;
 
-    @Column(name = "is_active")
+    @Column(name = "is_active", nullable = false)
     private boolean isActive;
 
     @OneToOne(mappedBy = "user")
