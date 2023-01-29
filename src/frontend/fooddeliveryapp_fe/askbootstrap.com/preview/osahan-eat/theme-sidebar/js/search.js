@@ -9,6 +9,7 @@ $(document).ready(function(){
             headers: {"Authorization": "Bearer " + accessToken},
         }).done(function (data) {
             let da = data.data;
+            $("#resSection").text(`RESTAURANTS(${da.length})`)
             let ind = 1;
             $.get("templateSearchList.html", function(content) {
             let searchList = $(content)
@@ -50,6 +51,7 @@ $(document).ready(function(){
             headers: {"Authorization": "Bearer " + accessToken},
         }).done(function (data) {
             let da = data.data;
+            $("#resSection").text(`RESTAURANTS(${da.length})`)
             let ind = 1;
             $.get("templateSearchList.html", function(content) {
             let searchList = $(content)
@@ -91,6 +93,7 @@ $(document).ready(function(){
             headers: {"Authorization": "Bearer " + accessToken},
         }).done(function (data) {
             let da = data.data;
+            $("#foodSection").text(`DISHES(${da.length})`)
             let ind = 1;
             $.get("templateSearchList.html", function(content) {
             let searchList = $(content)
