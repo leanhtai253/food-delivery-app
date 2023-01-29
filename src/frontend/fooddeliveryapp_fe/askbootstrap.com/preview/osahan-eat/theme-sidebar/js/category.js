@@ -9,6 +9,10 @@ $(document).ready(function () {
         headers: { "Authorization": "Bearer " + accessToken },
         success: function (response) {
             let data = response.data;
+            if(data.length > 0) {
+                $("#titleCategories").removeClass("d-none");
+                $("#seeAllCategories").removeClass("d-none");
+            }
             for(let i = 0; i < data.length; i++) {
                 $("#categories").append(`
                 <a href="listing.html" class="text-decoration-none col-xl-2 col-md-4 mb-4">

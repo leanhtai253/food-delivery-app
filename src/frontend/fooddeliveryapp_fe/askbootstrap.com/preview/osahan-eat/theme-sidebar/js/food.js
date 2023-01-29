@@ -15,6 +15,10 @@ function callApiAndRender(area) {
         success: function (response) {
             console.log(response);
             let data = response.data;
+            if(data.length > 0) {
+                $("#title" + area + "Food").removeClass("d-none")
+                $("#seeAll" + area + "Food").removeClass("d-none")
+            }
             data.forEach(item => {
                 $("#food" + area).append(`
                     <a href="#" class="text-decoration-none col-xl-4 col-md-4 mb-4" data-toggle="modal"
