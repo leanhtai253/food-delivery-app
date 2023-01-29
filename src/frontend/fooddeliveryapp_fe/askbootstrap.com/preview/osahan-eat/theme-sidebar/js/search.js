@@ -1,43 +1,6 @@
 let hostCard = "http://localhost:8481/search";
 $(document).ready(function(){
     let accessToken = getCookie("access-token");
-
-    // $(document).on("click", ".searchBtn", function() {
-    //     let keySearch = $("#searchInput").val()
-    //     $.ajax({
-    //         method: "GET",
-    //         url: hostCard + `/restaurant/${keySearch}`,
-    //         headers: {"Authorization": "Bearer " + accessToken},
-    //         success: function(data) {
-    //             let da = data.data;
-    //             let ind = 1;
-    //             da.forEach(function(el){
-    //                 $("#searchItem").html(`
-    //                 <div class="bg-light p-3 rounded">
-    //                     <img src="${el.imageRes}" class="img-fluid">
-    //                 </div>
-    //                 <div class="mx-3 py-2 w-100">
-    //                     <p class="mb-2 text-black">${el.nameRes}</p>
-    //                     <p class="small mb-2">
-    //                         <i class="mdi mdi-star text-warning mr-1"></i> <span
-    //                             class="font-weight-bold text-dark">${el.ratingRes}</span> (873)
-    //                         <i class="mdi mdi-silverware-fork-knife ml-3 mr-1"></i> ${el.cateRes}
-    //                         <i class="mdi mdi-currency-inr ml-3"></i> 340/-
-    //                     </p>
-    //                     <p class="mb-0 text-muted d-flex align-items-center"><span
-    //                             class="badge badge-light"><i class="mdi mdi-truck-fast-outline"></i>
-    //                             Free delivery</span>
-    //                         <span class="small ml-auto"><i class="mdi mdi-map-marker"></i> ${Math.floor(Math.random() * 100) * 0.1}
-    //                             km</span>
-    //                     </p>
-    //                 </div>
-    //                 `)
-    //                 ind += 1;
-    //             });
-    //         }
-    //     })
-    // });
-
     $(document).on("click", ".searchBtn", function() {
         let keySearch = $("#searchInput").val()
         $.ajax({
@@ -45,47 +8,36 @@ $(document).ready(function(){
             url: hostCard + `/restaurant/${keySearch}`,
             headers: {"Authorization": "Bearer " + accessToken},
         }).done(function (data) {
-            
-                let da = data.data;
-                let ind = 1;
-                $.get("templateSearchList.html", function(content) {
-                da.forEach(function(el){
+            let da = data.data;
+            let ind = 1;
+            $.get("templateSearchList.html", function(content) {
+            let searchList = $(content)
+            da.forEach(function(el){
+                        searchList.append(`
+                            <div class="bg-light p-3 rounded">
+                                <img src="img/restaurant/${el.imageRes}" class="img-fluid">
+                            </div>
+                            <div class="mx-3 py-2 w-100">
+                                <p class="mb-2 text-black">${el.nameRes}</p>
+                                <p class="small mb-2">
+                                    <i class="mdi mdi-star text-warning mr-1"></i> <span
+                                        class="font-weight-bold text-dark">${el.ratingRes}</span> (${da.length})
+                                    <i class="mdi mdi-silverware-fork-knife ml-3 mr-1"></i> ${el.cateRes}
+                                    <i class="mdi mdi-currency-inr ml-3"></i> 340/-
+                                </p>
+                                <p class="mb-0 text-muted d-flex align-items-center"><span
+                                        class="badge badge-light"><i class="mdi mdi-truck-fast-outline"></i>
+                                        Free delivery</span>
+                                    <span class="small ml-auto"><i class="mdi mdi-map-marker"></i> 1.5
+                                        km</span>
+                                </p>
+                            </div>
+                            `)
+                        $("#searchItem").html(searchList)
                     
-                        
-                            let searchList = $(content)
-            
-                            searchList.find(".searchPic").text(`(${el.imageRes})`)
-                            searchList.find(".searchName").text(`(${el.nameRes})`)
-                            searchList.find(".searchRate").text(`(${el.ratingRes})`)
-                            searchList.find(".searchCate").text(`(${el.cateRes})`)
-                            
-            
-                            $("#searchItem").append(searchList)
-                        
-                    })
-
-                    // $("#searchItem").html(`
-                    // <div class="bg-light p-3 rounded">
-                    //     <img src="${el.imageRes}" class="img-fluid">
-                    // </div>
-                    // <div class="mx-3 py-2 w-100">
-                    //     <p class="mb-2 text-black">${el.nameRes}</p>
-                    //     <p class="small mb-2">
-                    //         <i class="mdi mdi-star text-warning mr-1"></i> <span
-                    //             class="font-weight-bold text-dark">${el.ratingRes}</span> (873)
-                    //         <i class="mdi mdi-silverware-fork-knife ml-3 mr-1"></i> ${el.cateRes}
-                    //         <i class="mdi mdi-currency-inr ml-3"></i> 340/-
-                    //     </p>
-                    //     <p class="mb-0 text-muted d-flex align-items-center"><span
-                    //             class="badge badge-light"><i class="mdi mdi-truck-fast-outline"></i>
-                    //             Free delivery</span>
-                    //         <span class="small ml-auto"><i class="mdi mdi-map-marker"></i> ${Math.floor(Math.random() * 100) * 0.1}
-                    //             km</span>
-                    //     </p>
-                    // </div>
-                    // `)
-                    ind += 1;
-                });
+                })
+                ind += 1;
+            });
             
         })
     });
@@ -96,34 +48,38 @@ $(document).ready(function(){
             method: "GET",
             url: hostCard + `/restaurant/${keySearch}`,
             headers: {"Authorization": "Bearer " + accessToken},
-            success: function(data) {
-                let da = data.data;
-                console.log(da);
-                let ind = 1;
-                da.forEach(function(el){
-                    $("#searchItem").html(`
-                    <div class="bg-light p-3 rounded">
-                        <img src="${el.imageRes}" class="img-fluid">
-                    </div>
-                    <div class="mx-3 py-2 w-100">
-                        <p class="mb-2 text-black">${el.nameRes}</p>
-                        <p class="small mb-2">
-                            <i class="mdi mdi-star text-warning mr-1"></i> <span
-                                class="font-weight-bold text-dark">${el.ratingRes}</span> (873)
-                            <i class="mdi mdi-silverware-fork-knife ml-3 mr-1"></i> ${el.cateRes}
-                            <i class="mdi mdi-currency-inr ml-3"></i> 340/-
-                        </p>
-                        <p class="mb-0 text-muted d-flex align-items-center"><span
-                                class="badge badge-light"><i class="mdi mdi-truck-fast-outline"></i>
-                                Free delivery</span>
-                            <span class="small ml-auto"><i class="mdi mdi-map-marker"></i> ${Math.floor(Math.random() * 100) * 0.1}
-                                km</span>
-                        </p>
-                    </div>
-                    `)
-                    ind += 1;
-                });
-            }
+        }).done(function (data) {
+            let da = data.data;
+            let ind = 1;
+            $.get("templateSearchList.html", function(content) {
+            let searchList = $(content)
+            da.forEach(function(el){
+                        searchList.append(`
+                            <div class="bg-light p-3 rounded">
+                                <img src="img/restaurant/${el.imageRes}" class="img-fluid">
+                            </div>
+                            <div class="mx-3 py-2 w-100">
+                                <p class="mb-2 text-black">${el.nameRes}</p>
+                                <p class="small mb-2">
+                                    <i class="mdi mdi-star text-warning mr-1"></i> <span
+                                        class="font-weight-bold text-dark">${el.ratingRes}</span> (${da.length})
+                                    <i class="mdi mdi-silverware-fork-knife ml-3 mr-1"></i> ${el.cateRes}
+                                    <i class="mdi mdi-currency-inr ml-3"></i> 340/-
+                                </p>
+                                <p class="mb-0 text-muted d-flex align-items-center"><span
+                                        class="badge badge-light"><i class="mdi mdi-truck-fast-outline"></i>
+                                        Free delivery</span>
+                                    <span class="small ml-auto"><i class="mdi mdi-map-marker"></i> 5.7
+                                        km</span>
+                                </p>
+                            </div>
+                            `)
+                        $("#searchItem").html(searchList)
+                    
+                })
+                ind += 1;
+            });
+            
         })
     });
 
@@ -133,34 +89,38 @@ $(document).ready(function(){
             method: "GET",
             url: hostCard + `/food/${keySearch}`,
             headers: {"Authorization": "Bearer " + accessToken},
-            success: function(data) {
-                let da = data.data;
-                console.log(da);
-                let ind = 1;
-                da.forEach(function(el){
-                    $("#searchItem").html(`
-                    <div class="bg-light p-3 rounded">
-                        <img src="${el.imageDish}" class="img-fluid">
-                    </div>
-                    <div class="mx-3 py-2 w-100">
-                        <p class="mb-2 text-black">${el.nameDish}</p>
-                        <p class="small mb-2">
-                            <i class="mdi mdi-star text-warning mr-1"></i> <span
-                                class="font-weight-bold text-dark">${el.ratingDish}</span> (873)
-                            <i class="mdi mdi-silverware-fork-knife ml-3 mr-1"></i> ${el.cateDish}
-                            <i class="mdi mdi-currency-inr ml-3"></i> 340/-
-                        </p>
-                        <p class="mb-0 text-muted d-flex align-items-center"><span
-                                class="badge badge-light"><i class="mdi mdi-truck-fast-outline"></i>
-                                Free delivery</span>
-                            <span class="small ml-auto"><i class="mdi mdi-map-marker"></i> ${Math.floor(Math.random() * 100) * 0.1}
-                                km</span>
-                        </p>
-                    </div>
-                    `)
-                    ind += 1;
-                });
-            }
+        }).done(function (data) {
+            let da = data.data;
+            let ind = 1;
+            $.get("templateSearchList.html", function(content) {
+            let searchList = $(content)
+            da.forEach(function(el){
+                        searchList.append(`
+                            <div class="bg-light p-3 rounded">
+                                <img src="img/food/${el.imageDish}" class="img-fluid">
+                            </div>
+                            <div class="mx-3 py-2 w-100">
+                                <p class="mb-2 text-black">${el.nameDish}</p>
+                                <p class="small mb-2">
+                                    <i class="mdi mdi-star text-warning mr-1"></i> <span
+                                        class="font-weight-bold text-dark">${el.ratingDish}</span> (${da.length})
+                                    <i class="mdi mdi-silverware-fork-knife ml-3 mr-1"></i> ${el.cateDish}
+                                    <i class="mdi mdi-currency-inr ml-3"></i> 340/-
+                                </p>
+                                <p class="mb-0 text-muted d-flex align-items-center"><span
+                                        class="badge badge-light"><i class="mdi mdi-truck-fast-outline"></i>
+                                        Free delivery</span>
+                                    <span class="small ml-auto"><i class="mdi mdi-map-marker"></i> 3.5
+                                        km</span>
+                                </p>
+                            </div>
+                            `)
+                        $("#searchItem").html(searchList)
+                    
+                })
+                ind += 1;
+            });
+            
         })
     });
 })
