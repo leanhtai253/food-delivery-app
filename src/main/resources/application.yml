@@ -19,6 +19,7 @@ spring:
     url: jdbc:mysql://localhost:3307/food_delivery
     username: root
     password: admin123
+
 # MySQL settings
 # spring
 #  datasource:
