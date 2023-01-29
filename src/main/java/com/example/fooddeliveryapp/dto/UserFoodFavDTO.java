@@ -1,17 +1,22 @@
-package com.example.fooddeliveryapp.entities.id;
+package com.example.fooddeliveryapp.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.stereotype.Component;
 
-import java.io.Serializable;
+import java.util.List;
 
+@Component
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserFoodFavId implements Serializable {
+public class UserFoodFavDTO {
     private int idUser;
     private int idFood;
+    private UserDTO userDTO;
+    private FoodDTO foodDTO;
+
 }

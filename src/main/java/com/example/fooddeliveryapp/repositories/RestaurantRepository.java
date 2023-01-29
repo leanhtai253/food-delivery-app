@@ -15,6 +15,7 @@ public interface RestaurantRepository extends JpaRepository<RestaurantEntity, In
     @Query(value = "select r.* from restaurant as r order by r.id ASC limit 6", nativeQuery = true)
     List<RestaurantEntity> getTop6Restaurants();
 
+
     List<RestaurantEntity> findAll();
 
     RestaurantEntity findById(int id);

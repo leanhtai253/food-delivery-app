@@ -37,6 +37,15 @@ public class FoodMapper {
         return dto;
     }
 
+    public FoodEntity foodDTO2Food(FoodDTO dto){
+        FoodEntity entity = new FoodEntity();
+        entity.setId(dto.getId());
+        entity.setImage(dto.getImage());
+        entity.setName(dto.getName());
+        entity.setPrice(dto.getPrice());
+        entity.setArea(dto.getArea());
+        return entity;
+
     public FoodChoiceDTO foodToFoodChoiceDto(FoodEntity food){
         FoodChoiceDTO dto = new FoodChoiceDTO();
         dto.setId(food.getId());
@@ -47,5 +56,6 @@ public class FoodMapper {
         List<FoodAddOnEntity> list = new ArrayList<>(food.getFoodAddOns());
         dto.setFoodAddOn(list);
         return dto;
+
     }
 }

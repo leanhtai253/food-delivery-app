@@ -9,4 +9,6 @@ public class FoodDTO {
     private int id;
     private String name;
     private String image;
+    private float price;
+    private String area;
 }
