@@ -10,4 +10,5 @@ public class RestaurantDTO {
     private String name;
     private float rating;
     private String nationality;
+    private int id;
 }

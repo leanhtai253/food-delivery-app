@@ -1,5 +1,6 @@
 package com.example.fooddeliveryapp.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -32,5 +33,6 @@ public class RestaurantDetailEntity {
 
     @OneToOne()
     @JoinColumn(name = "id_restaurant")
+    @JsonIgnore
     private RestaurantEntity restaurant;
 }

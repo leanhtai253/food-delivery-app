@@ -1,13 +1,16 @@
 package com.example.fooddeliveryapp.controllers;
 
 import com.example.fooddeliveryapp.dto.RestaurantDTO;
+import com.example.fooddeliveryapp.dto.RestaurantDetailDto;
 import com.example.fooddeliveryapp.exceptions.RestaurantNotExistException;
 import com.example.fooddeliveryapp.payload.response.ResponseSuccess;
+import com.example.fooddeliveryapp.repositories.RestaurantRepository;
 import com.example.fooddeliveryapp.services.RestaurantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -41,5 +44,12 @@ public class RestaurantController {
         return new ResponseEntity<>(responseSuccess, HttpStatus.OK);
     }
 
-
+    @GetMapping("/view/{id}")
+    public ResponseEntity<?> getRestaurant(@PathVariable int id) {
+        RestaurantDetailDto data = restaurantService.getRestaurantDetail(id);
+        ResponseSuccess responseSuccess = new ResponseSuccess();
+        responseSuccess.setStatus(HttpStatus.OK.value());
+        responseSuccess.setData(data);
+        return new ResponseEntity<>(responseSuccess, HttpStatus.OK);
+    }
 }
