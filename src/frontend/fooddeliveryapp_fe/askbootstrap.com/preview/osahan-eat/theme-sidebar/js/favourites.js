@@ -1,5 +1,5 @@
 $(document).ready(function() {
-
+    let hostFav = "http://localhost:8481"
     showRestaurantFav();
     
 
@@ -18,6 +18,42 @@ $(document).ready(function() {
         $("#fav-food-btn").removeClass("bg-primary text-white").addClass("bg-light text-dark");
         showDishesFav();
     });
+
+    $(document).on("click", ".restaurantItem", function() {
+        // console.log($(this).itemId)
+        setCookie("viewRestaurantId",$(this).attr("restaurantId"))
+        setCookie("viewResCatId",1)
+    })
+
+    $(document).on("click",".foodItem", function(){
+        console.log($(this).attr("foodItem"))
+        foodItemId = parseInt($(this).attr("foodItem"))
+        $.ajax({
+            method: "GET",
+            url: hostFav + `/food/${foodItemId}`,
+            headers: {"Authorization": "Bearer " + getCookie("access-token")},
+        success: function(resp){
+            let data = resp.data
+            data.forEach((item)=>{
+                $("#foodDetailName").text(item.name)
+                $("#foodDetailDesc").text(item.description)
+                $("#foodDetailImg").attr("src",`img/food/${item.image}`)
+                $("#addToCartBtn").attr("foodItem",item.id)
+                $("#addToCartBtn").text(`Add (${item.price} 000 VND)`)
+                $.get("templateAddOn.html", function(content){
+                    item.foodAddOn.forEach((addon) => {
+                        templateAddOn = $(content)
+                        templateAddOn.html(`
+                        <input type="checkbox" class="custom-control-input" id="addOn${addon.id}">
+                        <label class="custom-control-label font-weight-bold text-dark" for="addOn${addon.id}">${addon.name}</label>`)
+                        $("#addOnList").append(templateAddOn)
+                    })
+                    
+                })
+            })
+        }
+        })
+    })
 })
 
 function showRestaurantFav() {
@@ -33,7 +69,7 @@ function showRestaurantFav() {
             data.forEach(item => {
                 var restaurant = item.restaurantDTO
                 $("#contentFav").append(`
-                    <a href="detail.html" class="text-dark text-decoration-none col-xl-4 col-lg-12 col-md-12">
+                    <a restaurantId=${item.idRestaurant} href="detail.html" class="restaurantItem text-dark text-decoration-none col-xl-4 col-lg-12 col-md-12">
                         <div class="bg-white shadow-sm rounded d-flex align-items-center p-1 mb-4 osahan-list">
                             <div class="bg-light p-3 rounded">
                                 <img src="img/restaurant/${restaurant.image}" class="img-fluid" />
@@ -71,8 +107,8 @@ function showDishesFav() {
             data.forEach(item => {
                 var food = item.foodDTO;
                 $("#contentFav").append(`
-                    <a href="#" class="text-decoration-none col-xl-4 col-md-4 mb-4" data-toggle="modal"
-                    data-target="#myitemsModal">
+                    <a foodItem=${item.idFood} href="#" class="foodItem text-decoration-none col-xl-4 col-md-4 mb-4" data-toggle="modal"
+                    data-target="#foodDetailModal">
                         <img src="img/food/${food.image}" class="img-fluid rounded" />
                         <div class="d-flex align-items-center mt-3">
                             <p class="text-black h6 m-0">${food.name}</p>

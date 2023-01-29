@@ -1,5 +1,5 @@
 let cartHost = "http://localhost:8481/cart";
-
+let hostCart = "http://localhost:8481"
 $(document).ready(function() {
     $.ajax({
         method: "GET",
@@ -77,6 +77,37 @@ $(document).ready(function() {
                 })
             }
             
+        })
+        
+    }) 
+    $(document).on("click","#addToCartBtn", function(){
+        foodItemId = parseInt($(this).attr("foodItem"))
+        $.ajax({
+            method: "GET",
+            url: hostCart + `/food/${foodItemId}`,
+            headers: {"Authorization": "Bearer " + getCookie("access-token")},
+        success: function(resp){
+            let data = resp.data
+            data.forEach((item)=>{
+                let newItem = {
+                    productId: item.id,
+                    quantity: 1,
+                    price: item.price,
+                    name: item.name,
+                    image: item.image
+                }
+                $.ajax({
+                    method: "POST",
+                    url: cartHost + "/add",
+                    headers: {"Authorization": "Bearer " + getCookie("access-token")},
+                    data: JSON.stringify(newItem),
+                    contentType: "application/json; charset=utf-8",
+                    success: function(resp) {
+                        location.reload()
+                    }
+                });
+            })
+        }
         })
         
     }) 
