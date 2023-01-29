@@ -113,7 +113,7 @@ public class FoodServiceImp implements FoodService{
 
     @Override
     public List<FoodChoiceDTO> getAllFoodDetailById(int id) throws FoodNotExistException {
-        List<FoodEntity> entities = foodRepository.findById(id);
+        List<FoodEntity> entities = foodRepository.findAllById(id);
         List<FoodChoiceDTO> dtos = new ArrayList<>();
         for (FoodEntity entity : entities){
             dtos.add(foodMapper.foodToFoodChoiceDto(entity));
