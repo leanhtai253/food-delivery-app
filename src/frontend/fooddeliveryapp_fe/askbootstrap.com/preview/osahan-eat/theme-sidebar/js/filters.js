@@ -1,4 +1,4 @@
-let filtersHost = "http://fooddeliveryappapi-env.eba-ampvcd6n.ap-northeast-1.elasticbeanstalk.com";
+let filtersHost = "http://foodappapi-env.eba-7inbxjki.ap-northeast-1.elasticbeanstalk.com";
 let hostCat = filtersHost + "/categories";
 let filterSubmission = {
     sortBy: "popularity",

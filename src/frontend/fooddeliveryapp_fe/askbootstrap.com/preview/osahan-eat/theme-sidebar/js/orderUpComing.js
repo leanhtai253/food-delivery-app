@@ -3,7 +3,7 @@ $(document).ready(function () {
     let accessToken = getCookie("access-token");
     $.ajax({
         method: "GET",
-        url: "http://fooddeliveryappapi-env.eba-ampvcd6n.ap-northeast-1.elasticbeanstalk.com/order/upcoming",
+        url: "http://foodappapi-env.eba-7inbxjki.ap-northeast-1.elasticbeanstalk.com/order/upcoming",
         headers: { "Authorization": "Bearer " + accessToken },
         success: function (response) {
             console.log(response);

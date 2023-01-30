@@ -1,4 +1,4 @@
-let host = "http://fooddeliveryappapi-env.eba-ampvcd6n.ap-northeast-1.elasticbeanstalk.com";
+let host = "http://foodappapi-env.eba-7inbxjki.ap-northeast-1.elasticbeanstalk.com";
 let hostAddr = host + "/user/address";
 $(document).ready(function(){
     let accessToken = getCookie("access-token");

@@ -1,4 +1,4 @@
-let hostResDetail = "http://fooddeliveryappapi-env.eba-ampvcd6n.ap-northeast-1.elasticbeanstalk.com"
+let hostResDetail = "http://foodappapi-env.eba-7inbxjki.ap-northeast-1.elasticbeanstalk.com"
 $(document).ready(function(){
     if (getCookie("viewRestaurantId").length > 0) {
         restaurantId = getCookie("viewRestaurantId");

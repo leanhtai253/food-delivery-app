@@ -3,7 +3,7 @@ $(document).ready(function () {
     let accessToken = getCookie("access-token");
     $.ajax({
         method: "GET",
-        url: "http://fooddeliveryappapi-env.eba-ampvcd6n.ap-northeast-1.elasticbeanstalk.com/settings/showUserInfo",
+        url: "http://foodappapi-env.eba-7inbxjki.ap-northeast-1.elasticbeanstalk.com/settings/showUserInfo",
         headers: { "Authorization": "Bearer " + accessToken },
         success: function (response) {
             let data = response.data;
@@ -29,7 +29,7 @@ $(document).ready(function () {
         let accessToken = getCookie("access-token");
         $.ajax({
             method: "GET",
-            url: "http://fooddeliveryappapi-env.eba-ampvcd6n.ap-northeast-1.elasticbeanstalk.com/settings/showUserInfo",
+            url: "http://foodappapi-env.eba-7inbxjki.ap-northeast-1.elasticbeanstalk.com/settings/showUserInfo",
             headers: { "Authorization": "Bearer " + accessToken },
             success: function (response) {
                 let data = response.data;
