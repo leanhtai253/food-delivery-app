@@ -49,6 +49,7 @@ public class WebSecurityConfig {
                 .cors().configurationSource(corsConfigurationSource())
                 .and()
                 .authorizeRequests()
+                .antMatchers("/welcome").permitAll()
                 .antMatchers("/authen/sign-in").permitAll()
                 .antMatchers("/authen/sign-up").permitAll()
                 .antMatchers("/settings/*").permitAll()
