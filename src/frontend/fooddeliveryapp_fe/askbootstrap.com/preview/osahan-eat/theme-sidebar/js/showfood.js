@@ -10,7 +10,7 @@ function callApiAndRender(area) {
     let accessToken = getCookie("access-token");
     $.ajax({
         method: "GET",
-        url: "http://localhost:8481/food/all/" + area,
+        url: "http://fooddeliveryappapi-env.eba-ampvcd6n.ap-northeast-1.elasticbeanstalk.com/food/all/" + area,
         headers: { "Authorization": "Bearer " + accessToken },
         success: function (response) {
             console.log(response);
