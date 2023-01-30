@@ -1,60 +1,38 @@
-const iconColors = ["bg-danger", "bg-primary", "bg-warning"];
-$(document).ready(function () {
+$(document).ready(function(){
     let accessToken = getCookie("access-token");
     $.ajax({
         method: "GET",
         url: "http://localhost:8481/settings/showUserInfo",
-        headers: { "Authorization": "Bearer " + accessToken },
-        success: function (response) {
-            let data = response.data;
-            if(data.length > 0) {
-                $("#seePersonInfo").removeClass("d-none");
-            }
-            for(let i = 0; i < data.length; i++) {
-                $("#categories").append(`
-                <a href="listing.html" class="text-decoration-none col-xl-2 col-md-4 mb-4">
-                    <div class="rounded py-4 bg-white shadow-sm text-center">
-                        <i class="mdi ${data[i].image} ${iconColors[i%3]} text-white osahan-icon mx-auto rounded-pill"></i>
-                        <h6 class="mb-1 mt-3">${data[i].name}</h6>
-                        <p class="mb-0 small">${data[i].count}+ options</p>
-                    </div>
-                </a>
-                `)
-            }
-        }
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify(data),
+        headers: {"Authorization": "Bearer " + accessToken},
+        success: function(data) {
+            console.log(data);
+            let avatar = data.avatar;
+            let fullName = data.fullName;
+            let email = data.email;
+            let phoneNumber =  data.phoneNumber;
+            $("#avatar").text(avatar);
+            $("#fullName").text(fullName);
+            $("#email").text(email);
+            $("#phoneNumber").text(phoneNumber);
+        },
     })
+    $.ajax({
+        method: "POST",
+        url: "http://localhost:8481/settings/updateUserInfo",
+        headers: {"Authorization": "Bearer " + accessToken},
+        success: function(response) {
 
-    $(document).on("click", "#seePersonInfo", function() {
-        $("#categories").empty();
-        let accessToken = getCookie("access-token");
-        $.ajax({
-            method: "GET",
-            url: "http://localhost:8481/settings/showUserInfo",
-            headers: { "Authorization": "Bearer " + accessToken },
-            success: function (response) {
-                let data = response.data;
-                for(let i = 0; i < data.length; i++) {
-                    $("#categories").append(`
-                    <a href="listing.html" class="text-decoration-none col-xl-2 col-md-4 mb-4">
-                        <div class="rounded py-4 bg-white shadow-sm text-center">
-                            <i class="mdi ${data[i].image} ${iconColors[i%3]} text-white osahan-icon mx-auto rounded-pill"></i>
-                            <h6 class="mb-1 mt-3">${data[i].name}</h6>
-                            <p class="mb-0 small">${data[i].count}+ options</p>
-                        </div>
-                    </a>
-                    `)
-                }
-            }
-        })
+        }
+
     });
 })
-
-
 function getCookie(cname) {
     var name = cname + "=";
     var decodedCookie = decodeURIComponent(document.cookie);
     var ca = decodedCookie.split(';');
-    for (var i = 0; i < ca.length; i++) {
+    for(var i = 0; i <ca.length; i++) {
         var c = ca[i];
         while (c.charAt(0) == ' ') {
             c = c.substring(1);

@@ -17,6 +17,7 @@ public class UserMapper {
         userDTO.setVerifyCode(user.getVerifyCode());
         userDTO.setVerifyCodeExpired(user.getVerifyCodeExpired());
         userDTO.setActive(user.isActive());
+        userDTO.setAvatar(user.getAvatar());
         return userDTO;
     }
 

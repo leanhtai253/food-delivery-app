@@ -14,4 +14,5 @@ public class UserDTO {
     private String verifyCode;
     private String verifyCodeExpired;
     boolean isActive;
+    private String avatar;
 }
