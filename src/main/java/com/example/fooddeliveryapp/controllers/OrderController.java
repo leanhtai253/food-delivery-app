@@ -44,12 +44,12 @@ public class OrderController {
     }
 
     @GetMapping("/previous/{id}")
-    public ResponseEntity<?> getOrderPreviousDetails(@PathVariable(name = "id") int id){
+    public ResponseEntity<?> getOrderPreviousDetail(@PathVariable(name = "id", required = true) int id){
         String email = SecurityContextHolder.getContext().getAuthentication().getName();
         List<Object> returnData = new ArrayList<>();
         ResponseSuccess responseSuccess = new ResponseSuccess();
         responseSuccess.setStatus(HttpStatus.OK.value());
-        responseSuccess.setData(returnData);
+        responseSuccess.setData(orderService.getOrderPreviousDetails(email,id));
         return new ResponseEntity<>(responseSuccess, HttpStatus.OK);
     }
 }
