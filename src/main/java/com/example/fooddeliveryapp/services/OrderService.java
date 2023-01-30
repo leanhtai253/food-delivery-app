@@ -9,4 +9,6 @@ public interface OrderService {
     List<OrderUpComingDTO> getOrderUpComing(String email);
 
     List<OrderPreviousDTO> getOrderPrevious(String email);
+
+    List<Object> getOrderPreviousDetails(String email, int idOrder);
 }
