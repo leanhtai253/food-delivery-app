@@ -1,7 +1,7 @@
 const areas = ["Asian", "America"];
 
 $(document).ready(function() {
-    let hostFood = "http://fooddeliveryappapi-env.eba-ampvcd6n.ap-northeast-1.elasticbeanstalk.com"
+    let hostFood = "http://foodappapi-env.eba-7inbxjki.ap-northeast-1.elasticbeanstalk.com"
     areas.forEach(area => {
         callApiAndRender(area);
     })
@@ -40,7 +40,7 @@ function callApiAndRender(area) {
     let accessToken = getCookie("access-token");
     $.ajax({
         method: "GET",
-        url: "http://fooddeliveryappapi-env.eba-ampvcd6n.ap-northeast-1.elasticbeanstalk.com/food/t6/" + area,
+        url: "http://foodappapi-env.eba-7inbxjki.ap-northeast-1.elasticbeanstalk.com/food/t6/" + area,
         headers: { "Authorization": "Bearer " + accessToken },
         success: function (response) {
             console.log(response);

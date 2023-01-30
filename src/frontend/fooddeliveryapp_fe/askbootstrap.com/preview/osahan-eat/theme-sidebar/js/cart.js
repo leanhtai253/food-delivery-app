@@ -1,5 +1,5 @@
-let cartHost = "http://fooddeliveryappapi-env.eba-ampvcd6n.ap-northeast-1.elasticbeanstalk.com/cart";
-let hostCart = "http://fooddeliveryappapi-env.eba-ampvcd6n.ap-northeast-1.elasticbeanstalk.com"
+let cartHost = "http://foodappapi-env.eba-7inbxjki.ap-northeast-1.elasticbeanstalk.com/cart";
+let hostCart = "http://foodappapi-env.eba-7inbxjki.ap-northeast-1.elasticbeanstalk.com"
 $(document).ready(function() {
     $.ajax({
         method: "GET",

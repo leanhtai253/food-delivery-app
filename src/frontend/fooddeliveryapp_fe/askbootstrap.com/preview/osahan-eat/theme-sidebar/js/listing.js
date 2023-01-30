@@ -1,4 +1,4 @@
-let listingsHost = "http://fooddeliveryappapi-env.eba-ampvcd6n.ap-northeast-1.elasticbeanstalk.com" + "/listings/sort";
+let listingsHost = "http://foodappapi-env.eba-7inbxjki.ap-northeast-1.elasticbeanstalk.com" + "/listings/sort";
 $(document).ready(function () {
   if (getCookie("listingsFilter") != null) {
     filterSubmission = JSON.parse(getCookie("listingsFilter"));
