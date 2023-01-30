@@ -1,8 +1,38 @@
 const areas = ["Asian", "America"];
 
 $(document).ready(function() {
+    let hostFood = "http://fooddeliveryappapi-env.eba-ampvcd6n.ap-northeast-1.elasticbeanstalk.com"
     areas.forEach(area => {
         callApiAndRender(area);
+    })
+    $(document).on("click",".foodItem", function(){
+        console.log($(this).attr("foodItem"))
+        foodItemId = parseInt($(this).attr("foodItem"))
+        $.ajax({
+            method: "GET",
+            url: hostFood + `/food/${foodItemId}`,
+            headers: {"Authorization": "Bearer " + getCookie("access-token")},
+        success: function(resp){
+            let data = resp.data
+            $("#addOnList").empty()
+            data.forEach((item)=>{
+                $("#foodDetailName").text(item.name)
+                $("#foodDetailDesc").text(item.description)
+                $("#foodDetailImg").attr("src",`img/food/${item.image}`)
+                $("#addToCartBtn").attr("foodItem",item.id)
+                $("#addToCartBtn").text(`Add (${item.price} 000 VND)`)
+                $.get("templateAddOn.html", function(content){
+                    item.foodAddOn.forEach((addon) => {
+                        templateAddOn = $(content)
+                        templateAddOn.html(`
+                        <input type="checkbox" class="custom-control-input" id="addOn${addon.id}">
+                        <label class="custom-control-label font-weight-bold text-dark" for="addOn${addon.id}">${addon.name}</label>`)
+                        $("#addOnList").append(templateAddOn)
+                    })
+                })
+            })
+        }
+        })
     })
 })
 
@@ -10,7 +40,7 @@ function callApiAndRender(area) {
     let accessToken = getCookie("access-token");
     $.ajax({
         method: "GET",
-        url: "http://localhost:8481/food/t6/" + area,
+        url: "http://fooddeliveryappapi-env.eba-ampvcd6n.ap-northeast-1.elasticbeanstalk.com/food/t6/" + area,
         headers: { "Authorization": "Bearer " + accessToken },
         success: function (response) {
             console.log(response);
@@ -21,8 +51,8 @@ function callApiAndRender(area) {
             }
             data.forEach(item => {
                 $("#food" + area).append(`
-                    <a href="#" class="text-decoration-none col-xl-4 col-md-4 mb-4" data-toggle="modal"
-                    data-target="#myitemsModal">
+                    <a foodItem=${item.id} href="#" class="foodItem text-decoration-none col-xl-4 col-md-4 mb-4" data-toggle="modal"
+                    data-target="#foodDetailModal">
                         <img src="img/food/${item.image}" class="img-fluid rounded" />
                         <div class="d-flex align-items-center mt-3">
                             <p class="text-black h6 m-0">${item.name}</p>

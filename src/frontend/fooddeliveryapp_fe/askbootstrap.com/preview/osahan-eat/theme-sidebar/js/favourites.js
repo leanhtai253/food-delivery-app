@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    let hostFav = "http://localhost:8481"
+    let hostFav = "http://fooddeliveryappapi-env.eba-ampvcd6n.ap-northeast-1.elasticbeanstalk.com"
     showRestaurantFav();
     
 
@@ -34,6 +34,7 @@ $(document).ready(function() {
             headers: {"Authorization": "Bearer " + getCookie("access-token")},
         success: function(resp){
             let data = resp.data
+            $("#addOnList").empty()
             data.forEach((item)=>{
                 $("#foodDetailName").text(item.name)
                 $("#foodDetailDesc").text(item.description)
@@ -60,7 +61,7 @@ function showRestaurantFav() {
     let accessToken = getCookie("access-token");
     $.ajax({
         method: "GET",
-        url: "http://localhost:8481/favourites/restaurant/show",
+        url: "http://fooddeliveryappapi-env.eba-ampvcd6n.ap-northeast-1.elasticbeanstalk.com/favourites/restaurant/show",
         headers: { "Authorization": "Bearer " + accessToken },
         success: function (response) {
             console.log(response);
@@ -98,7 +99,7 @@ function showDishesFav() {
     let accessToken = getCookie("access-token");
     $.ajax({
         method: "GET",
-        url: "http://localhost:8481/favourites/food/show",
+        url: "http://fooddeliveryappapi-env.eba-ampvcd6n.ap-northeast-1.elasticbeanstalk.com/favourites/food/show",
         headers: { "Authorization": "Bearer " + accessToken },
         success: function (response) {
             console.log(response);

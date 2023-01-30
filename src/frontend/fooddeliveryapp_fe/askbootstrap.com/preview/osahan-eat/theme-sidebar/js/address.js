@@ -1,4 +1,4 @@
-let host = "http://localhost:8481";
+let host = "http://fooddeliveryappapi-env.eba-ampvcd6n.ap-northeast-1.elasticbeanstalk.com";
 let hostAddr = host + "/user/address";
 $(document).ready(function(){
     let accessToken = getCookie("access-token");
@@ -99,7 +99,10 @@ $(document).ready(function(){
             data: JSON.stringify(newAddr),
             contentType: "application/json; charset=utf-8",
             headers: {"Authorization": "Bearer " + accessToken},
-            success: location.reload()
+            success: function(data){
+                // console.log(data)
+                location.reload()
+            }
         })
     });
 })

@@ -8,7 +8,7 @@ $(document).ready(function () {
         }
         $.ajax({
             method: "POST",
-            url: "http://localhost:8481/authen/sign-up",
+            url: "http://fooddeliveryappapi-env.eba-ampvcd6n.ap-northeast-1.elasticbeanstalk.com/authen/sign-up",
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify(data),
             error: function(response) {

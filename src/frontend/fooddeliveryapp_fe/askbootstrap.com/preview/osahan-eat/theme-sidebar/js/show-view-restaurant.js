@@ -1,4 +1,4 @@
-let hostResDetail = "http://localhost:8481"
+let hostResDetail = "http://fooddeliveryappapi-env.eba-ampvcd6n.ap-northeast-1.elasticbeanstalk.com"
 $(document).ready(function(){
     if (getCookie("viewRestaurantId").length > 0) {
         restaurantId = getCookie("viewRestaurantId");
@@ -55,6 +55,7 @@ $(document).ready(function(){
                 headers: {"Authorization": "Bearer " + getCookie("access-token")},
             success: function(resp){
                 let data = resp.data
+                $("#addOnList").empty()
                 data.forEach((item)=>{
                     $("#foodDetailName").text(item.name)
                     $("#foodDetailDesc").text(item.description)
