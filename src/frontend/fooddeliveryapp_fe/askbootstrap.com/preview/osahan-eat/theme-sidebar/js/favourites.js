@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    let hostFav = "http://fooddeliveryappapi-env.eba-ampvcd6n.ap-northeast-1.elasticbeanstalk.com"
+    let hostFav = "http://foodappapi-env.eba-7inbxjki.ap-northeast-1.elasticbeanstalk.com"
     showRestaurantFav();
     
 
@@ -61,7 +61,7 @@ function showRestaurantFav() {
     let accessToken = getCookie("access-token");
     $.ajax({
         method: "GET",
-        url: "http://fooddeliveryappapi-env.eba-ampvcd6n.ap-northeast-1.elasticbeanstalk.com/favourites/restaurant/show",
+        url: "http://foodappapi-env.eba-7inbxjki.ap-northeast-1.elasticbeanstalk.com/favourites/restaurant/show",
         headers: { "Authorization": "Bearer " + accessToken },
         success: function (response) {
             console.log(response);
@@ -99,7 +99,7 @@ function showDishesFav() {
     let accessToken = getCookie("access-token");
     $.ajax({
         method: "GET",
-        url: "http://fooddeliveryappapi-env.eba-ampvcd6n.ap-northeast-1.elasticbeanstalk.com/favourites/food/show",
+        url: "http://foodappapi-env.eba-7inbxjki.ap-northeast-1.elasticbeanstalk.com/favourites/food/show",
         headers: { "Authorization": "Bearer " + accessToken },
         success: function (response) {
             console.log(response);

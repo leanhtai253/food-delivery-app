@@ -7,7 +7,7 @@ $(document).ready(function(){
         }
         $.ajax({  
             method: "POST",
-            url: "http://fooddeliveryappapi-env.eba-ampvcd6n.ap-northeast-1.elasticbeanstalk.com/authen/sign-in",
+            url: "http://foodappapi-env.eba-7inbxjki.ap-northeast-1.elasticbeanstalk.com/authen/sign-in",
             data: JSON.stringify(data),
             contentType: "application/json; charset=utf-8",
             error: function(response) {

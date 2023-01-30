@@ -1,4 +1,4 @@
-let hostCard = "http://fooddeliveryappapi-env.eba-ampvcd6n.ap-northeast-1.elasticbeanstalk.com/card";
+let hostCard = "http://foodappapi-env.eba-7inbxjki.ap-northeast-1.elasticbeanstalk.com/card";
 $(document).ready(function(){
     let accessToken = getCookie("access-token");
     $.ajax({
